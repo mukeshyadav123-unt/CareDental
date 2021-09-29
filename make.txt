@@ -1,9 +1,0 @@
-# Hello It is our Care Dental project.
-
-# Our Team members are:
-#1. Poojitha Penmesta
-#2. Dhruvil Dudhat
-#3. Pramod Shrestha
-#4. Paras KC
-#5. Aditya Gautam
-#6. Mukesh Yadav
