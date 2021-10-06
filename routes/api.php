@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PatientAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::group(['prefix' => 'patient'] , function (){
+   Route::post('login' , [PatientAuthController::class  , 'login']);
+   Route::post('signup' , [PatientAuthController::class  , 'signup']);
 });
