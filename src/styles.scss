@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~ngx-toastr/toastr";
+@import "./assets/scss/fonts";
+:root {
+  --main-color: #2a4f96;
+  --side-color: #4e4e4e;
+}
+* {
+  font-family: Poppins;
+}
+.main-color {
+  color: var(--main-color);
+}

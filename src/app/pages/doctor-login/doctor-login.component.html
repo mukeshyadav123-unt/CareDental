@@ -1,0 +1,57 @@
+<section id="login" class="">
+  <div
+    class="d-flex justify-content-center align-items-center login-form h-100"
+  >
+    <div class="form-container">
+      <h2 class="text-center text-white mb-4">Doctor Login</h2>
+      <form #loginForm="ngForm">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input
+            [(ngModel)]="user.email"
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+            name="email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input
+            [(ngModel)]="user.password"
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            placeholder="Password"
+            name="password"
+            required
+            minlength="8"
+            maxlength="32"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="btn login-btn"
+          (click)="login()"
+          [disabled]="!loginForm.valid"
+        >
+          Log in
+        </button>
+        <div class="text-center mt-3">
+          <p class="mt-4 mb-0">
+            Don't have an account?
+            <a routerLink="/doctor-signup" class="login-link">Doctor Signup</a>
+          </p>
+        </div>
+        <div class="text-center">
+          <p class="mt-4 mb-0">Not a doctor?</p>
+          <a routerLink="/user-login" class="login-link">User Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
