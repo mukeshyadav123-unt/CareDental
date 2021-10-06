@@ -2,12 +2,15 @@
 @import "~ngx-toastr/toastr";
 @import "./assets/scss/fonts";
 :root {
-  --main-color: #2a4f96;
-  --side-color: #4e4e4e;
+  --main-color: #20344a;
+  --side-color: #882954;
 }
 * {
   font-family: Poppins;
 }
 .main-color {
   color: var(--main-color);
+}
+.side-color {
+  color: var(--side-color);
 }

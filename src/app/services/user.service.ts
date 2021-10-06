@@ -46,6 +46,12 @@ export class UserService {
 
   public logout() {
     this._CookieService.delete('Token');
-    this.router.navigate(['/register']);
+    this.router.navigate(['/doctor-signup']);
+  }
+  getMe() {
+    return this._HttpClient.get(`${environment.api}/api/me`);
+  }
+  updateProfile(profile: any) {
+    return this._HttpClient.put(`${environment.api}/api/me`, profile);
   }
 }

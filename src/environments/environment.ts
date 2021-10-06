@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api: 'http://ce53eae837a3.ngrok.io',
+  api: 'http://doctor-project-backend.test',
 };
 
 /*

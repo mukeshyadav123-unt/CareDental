@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { DoctorSignUpComponent } from './pages/doctor-sign-up/doctor-sign-up.component';
 import { UserSignUpComponent } from './pages/user-sign-up/user-sign-up.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { UserSignUpComponent } from './pages/user-sign-up/user-sign-up.component
     HomeComponent,
     DoctorSignUpComponent,
     UserSignUpComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
