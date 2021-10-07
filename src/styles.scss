@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~ngx-toastr/toastr";
 @import "./assets/scss/fonts";
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
 :root {
   --main-color: #20344a;
   --side-color: #882954;

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/internal/operators/map';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

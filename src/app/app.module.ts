@@ -17,6 +17,8 @@ import { FormsModule } from '@angular/forms';
 import { DoctorSignUpComponent } from './pages/doctor-sign-up/doctor-sign-up.component';
 import { UserSignUpComponent } from './pages/user-sign-up/user-sign-up.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     DoctorSignUpComponent,
     UserSignUpComponent,
     ProfileComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     HttpClientModule,
     FormsModule,
     ToastrModule.forRoot(),
+    CarouselModule,
   ],
   providers: [
     CookieService,
