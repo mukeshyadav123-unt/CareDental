@@ -11,7 +11,7 @@ export class DoctorSignUpComponent implements OnInit {
   user = {
     name: '',
     email: '',
-    age: '',
+    birthday: '',
     phone_number: '',
     gender: 'male',
     password: '',

@@ -11,11 +11,12 @@ export class ProfileComponent implements OnInit {
   profile: any = {
     name: '',
     email: '',
-    age: '',
+    birthday: '',
     phone_number: '',
     gender: 'male',
     current_password: '',
     new_password: '',
+    new_password_confirmation: '',
   };
   constructor(
     private userService: UserService,
@@ -31,7 +32,15 @@ export class ProfileComponent implements OnInit {
     });
   }
   updateProfile() {
-    this.userService.updateProfile(this.profile).subscribe(
+    let updatedUser: any = Object.assign({}, this.profile);
+    if (
+      this.profile.new_password == '' ||
+      this.profile.new_password_confirmation == ''
+    ) {
+      delete updatedUser.new_password;
+      delete updatedUser.new_password_confirmation;
+    }
+    this.userService.updateProfile(updatedUser).subscribe(
       (res: any) => {
         this.customToastrService.showToast('Profile Updated', 'Updated');
         this.getProfile();
