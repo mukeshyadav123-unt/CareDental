@@ -12,7 +12,10 @@ class PatientAuthController extends Controller
     public function login(PatientLoginRequest $request)
     {
         $user = User::where('email', $request->email)
-            ->where('password', Hash::make($request->password))->get();
+            ->where('password', Hash::make($request->password))
+            ->where('type' , 'patient')
+            ->get();
+
         abort_if(!$user, 400, 'wrong email or password');
         $token = $user->createToken($user->email, ['patient'])->plainTextToken;
         return response()->json([
