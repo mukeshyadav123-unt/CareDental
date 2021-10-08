@@ -1,0 +1,29 @@
+#login {
+  height: 100vh;
+  min-height: 500px;
+  background-color: #e2e2e2;
+  color: white;
+  background: url("../../../assets/images/doctor-image.jpg") rgb(0 0 0 / 50%);
+  background-blend-mode: overlay;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  .form-container {
+    padding: 45px;
+    background-color: var(--main-color);
+    border-radius: 12px;
+    label {
+      font-size: 0.8em;
+    }
+    .login-link {
+      color: #3898ff;
+      text-decoration: underline;
+    }
+    .login-btn {
+      width: 100%;
+      background-color: #882954;
+      color: white;
+      margin-top: 15px;
+    }
+  }
+}

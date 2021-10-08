@@ -1,0 +1,57 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/internal/operators/map';
+import { environment } from 'src/environments/environment';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class UserService {
+  redirectUrl = '/';
+
+  constructor(
+    private _HttpClient: HttpClient,
+    private _CookieService: CookieService,
+    private router: Router
+  ) {}
+  public login(user: any): Observable<any> {
+    return this._HttpClient
+      .post(`${environment.api}/api/patient/login`, user, {
+        responseType: 'json',
+      })
+      .pipe(
+        map((response: any) => {
+          if (response) {
+            this._CookieService.set('Token', response['token']);
+
+            this.router.navigate([this.redirectUrl]);
+          }
+        })
+      );
+  }
+  public register(user: any): Observable<any> {
+    return this._HttpClient
+      .post(`${environment.api}/api/patient/signup`, user)
+      .pipe(
+        map((response) => {
+          if (response) {
+            this.router.navigate(['/user-login']);
+          }
+        })
+      );
+  }
+
+  public logout() {
+    this._CookieService.delete('Token');
+    this.router.navigate(['/doctor-signup']);
+  }
+  getMe() {
+    return this._HttpClient.get(`${environment.api}/api/me`);
+  }
+  updateProfile(profile: any) {
+    return this._HttpClient.put(`${environment.api}/api/me`, profile);
+  }
+}

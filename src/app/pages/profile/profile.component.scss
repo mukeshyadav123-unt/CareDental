@@ -1,0 +1,14 @@
+.profile {
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f0f3fb;
+  .card {
+    border-radius: 13px;
+    padding: 20px;
+    .save-btn {
+      max-width: 120px;
+      background-color: var(--side-color);
+      color: white;
+    }
+  }
+}
