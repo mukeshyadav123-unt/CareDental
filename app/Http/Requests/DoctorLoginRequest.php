@@ -9,7 +9,7 @@ class DoctorLoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['email' , 'required' , 'exists:users,email'],
+            'email' => ['email' , 'required' , ],
             'password' => ['min:6' ,'required'],
         ];
     }

@@ -15,11 +15,11 @@ class DoctorAuthController extends Controller
     public function login(DoctorLoginRequest $request)
     {
         $user = User::where('email', $request->email)
-            ->where('password', Hash::make($request->password))
-            ->where('type' , 'doctor')
-            ->get();
+            ->where('type', 'doctor')
+            ->first();
 
         abort_if(!$user, 400, 'wrong email or password');
+        abort_if(Hash::check($user->password , $request->password), 400, 'wrong email or password');
         $token = $user->createToken($user->email, ['doctor'])->plainTextToken;
         return response()->json([
             'message' => 'success',
@@ -31,6 +31,8 @@ class DoctorAuthController extends Controller
     {
         $validated = $request->validated();
         $validated = array_merge($validated, ['type' => 'doctor']);
+        $validated['password'] = Hash::make($validated['password']);
+
         User::create($validated);
 
         return response()->json([

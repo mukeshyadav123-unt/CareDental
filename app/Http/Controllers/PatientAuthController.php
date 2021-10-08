@@ -12,11 +12,12 @@ class PatientAuthController extends Controller
     public function login(PatientLoginRequest $request)
     {
         $user = User::where('email', $request->email)
-            ->where('password', Hash::make($request->password))
-            ->where('type' , 'patient')
-            ->get();
+            ->where('type', 'patient')
+            ->first();
 
         abort_if(!$user, 400, 'wrong email or password');
+        abort_if(!$user, 400, 'wrong email or password');
+
         $token = $user->createToken($user->email, ['patient'])->plainTextToken;
         return response()->json([
             'message' => 'success',
@@ -28,6 +29,8 @@ class PatientAuthController extends Controller
     {
         $validated = $request->validated();
         $validated = array_merge($validated, ['type' => 'patient']);
+        $validated['password'] = Hash::make($validated['password']);
+
         User::create($validated);
         return response()->json([
             'message' => 'user register successfully'

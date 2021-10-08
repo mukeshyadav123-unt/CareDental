@@ -11,9 +11,10 @@ class DoctorSignupRequest extends FormRequest
         return [
             'name' => ['required' , 'min:2'],
             'email' => ['required' , 'email' , 'unique:users,email'],
-            'phone_number' =>  ['required' , 'phone'],
+            'phone_number' =>  ['required' ,],
             'age' => ['required' , 'numeric' , 'min:10'],
-            'gender' => ['required']
+            'gender' => ['required'],
+            'password' => ['required' , 'confirmed']
         ];
     }
 
