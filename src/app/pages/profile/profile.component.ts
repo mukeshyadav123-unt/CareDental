@@ -13,7 +13,6 @@ export class ProfileComponent implements OnInit {
     email: '',
     birthday: '',
     phone_number: '',
-    gender: 'male',
     current_password: '',
     new_password: '',
     new_password_confirmation: '',

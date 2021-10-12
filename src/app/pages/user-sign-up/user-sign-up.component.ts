@@ -13,7 +13,6 @@ export class UserSignUpComponent implements OnInit {
     email: '',
     birthday: '',
     phone_number: '',
-    gender: 'male',
     password: '',
     password_confirmation: '',
   };
