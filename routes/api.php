@@ -2,17 +2,18 @@
 
 use App\Http\Controllers\DoctorAuthController;
 use App\Http\Controllers\PatientAuthController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
 
-Route::group(['middleware' => 'auth:sanctum'] , function (){
-   Route::get('' ,function (){
-       return response()->json([
-           'message' => 'you are logged in'
-       ]);
-   });
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get("me", [ProfileController::class, 'showMe']);
+    Route::post("me/delete", [ProfileController::class, 'destroy']);
+    Route::put("me", [ProfileController::class, 'update']);
+
+
 
 });
 

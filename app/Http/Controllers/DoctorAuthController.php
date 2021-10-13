@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DoctorLoginRequest;
 use App\Http\Requests\DoctorSignupRequest;
-use App\Http\Requests\PatientLoginRequest;
-use App\Http\Requests\PatientSignupRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
