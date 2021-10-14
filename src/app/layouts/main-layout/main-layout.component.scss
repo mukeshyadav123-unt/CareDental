@@ -1,0 +1,11 @@
+.wrapper {
+  width: calc(100% - 220px);
+  margin-left: auto;
+}
+
+@media screen and (max-width: 800px) {
+  .wrapper {
+    width: calc(100% - 40px);
+    margin-left: auto;
+  }
+}

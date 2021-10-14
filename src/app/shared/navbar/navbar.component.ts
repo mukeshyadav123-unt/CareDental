@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,10 +7,15 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private userService: UserService) {}
+  currentUser: any = null;
+  constructor(private authService: AuthService) {
+    this.authService.userSubject.subscribe((user) => {
+      this.currentUser = user;
+    });
+  }
 
   ngOnInit(): void {}
   logoutClicked() {
-    this.userService.logout();
+    this.authService.logout();
   }
 }

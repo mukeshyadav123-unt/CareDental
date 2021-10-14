@@ -15,14 +15,18 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
       <li
-        class="nav-item transparent"
-        [routerLinkActive]="'active'"
-        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-item transparent logout-icon"
+        (click)="logoutClicked()"
+        *ngIf="currentUser.role"
       >
-        <a class="nav-link" [routerLink]="['/']">Home</a>
+        <i class="fas fa-sign-out-alt"></i>
       </li>
 
-      <li class="nav-item transparent" [routerLinkActive]="'active'">
+      <li
+        class="nav-item transparent"
+        [routerLinkActive]="'active'"
+        *ngIf="!currentUser || !currentUser.role"
+      >
         <a
           class="nav-link"
           style="cursor: pointer"
@@ -30,31 +34,8 @@
           >Login</a
         >
       </li>
-      <li class="nav-item">
-        <a class="nav-link" style="cursor: pointer">
-          <div class="dropdown">
-            <button
-              class="btn dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <i class="fas fa-user"></i>
-            </button>
-            <div
-              class="dropdown-menu dropdown-menu-right"
-              aria-labelledby="dropdownMenuButton"
-            >
-              <a class="dropdown-item main-color" (click)="logoutClicked()"
-                >Logout</a
-              >
-            </div>
-          </div>
-        </a>
-      </li>
-      <li class="nav-item">
+
+      <li class="nav-item" *ngIf="!currentUser.role">
         <a
           class="nav-link start-btn-link"
           [routerLink]="['doctor-signup']"

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomToastrService } from 'src/app/services/CustomToastr.service';
-import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user-sign-up',
@@ -17,13 +17,13 @@ export class UserSignUpComponent implements OnInit {
     password_confirmation: '',
   };
   constructor(
-    private userService: UserService,
+    private authService: AuthService,
     private customToastrService: CustomToastrService
   ) {}
 
   ngOnInit(): void {}
   register() {
-    this.userService.register(this.user).subscribe(
+    this.authService.userRegister(this.user).subscribe(
       (res) => {
         this.customToastrService.showToast(
           'Account created successfully',

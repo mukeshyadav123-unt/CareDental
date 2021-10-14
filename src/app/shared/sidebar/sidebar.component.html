@@ -1,0 +1,22 @@
+<div class="sidebar">
+  <a
+    [routerLinkActive]="'active'"
+    [routerLink]="['/home']"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    <i class="fas fa-home"></i>
+    <span>Home</span></a
+  >
+  <a [routerLinkActive]="'active'" [routerLink]="['/profile']">
+    <i class="fas fa-user"></i>
+    <span>Profile</span></a
+  >
+  <a [routerLinkActive]="'active'" [routerLink]="['/times']">
+    <i class="fas fa-business-time"></i>
+    <span>Work Times</span></a
+  >
+  <a [routerLinkActive]="'active'" [routerLink]="['/visits']">
+    <i class="fas fa-calendar-check"></i>
+    <span>Visits</span></a
+  >
+</div>

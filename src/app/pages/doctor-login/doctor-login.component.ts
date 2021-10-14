@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomToastrService } from 'src/app/services/CustomToastr.service';
-import { DoctorService } from 'src/app/services/doctor.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,14 +15,20 @@ export class DoctorLoginComponent implements OnInit {
     password: '',
   };
   constructor(
-    private doctorService: DoctorService,
-    private customToastrService: CustomToastrService
+    private authService: AuthService,
+    private customToastrService: CustomToastrService,
+    private cookieService: CookieService,
+    private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.cookieService.check('Token')) {
+      this.router.navigate(['/']);
+    }
+  }
 
   login() {
-    this.doctorService.login(this.user).subscribe(
+    this.authService.doctorLogin(this.user).subscribe(
       (res) => {},
       (err) => {
         // Object.keys(err)

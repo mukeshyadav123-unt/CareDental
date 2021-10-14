@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomToastrService } from 'src/app/services/CustomToastr.service';
-import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
     new_password_confirmation: '',
   };
   constructor(
-    private userService: UserService,
+    private authService: AuthService,
     private customToastrService: CustomToastrService
   ) {}
 
@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
     this.getProfile();
   }
   getProfile() {
-    this.userService.getMe().subscribe((res: any) => {
+    this.authService.getMe().subscribe((res: any) => {
       this.profile = res;
     });
   }
@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
       delete updatedUser.new_password;
       delete updatedUser.new_password_confirmation;
     }
-    this.userService.updateProfile(updatedUser).subscribe(
+    this.authService.updateProfile(updatedUser).subscribe(
       (res: any) => {
         this.customToastrService.showToast('Profile Updated', 'Updated');
         this.getProfile();

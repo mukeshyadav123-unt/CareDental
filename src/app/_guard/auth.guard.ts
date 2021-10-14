@@ -6,14 +6,14 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
     protected router: Router,
-    protected _UserService: UserService,
+    protected authService: AuthService,
     private _CookieService: CookieService
   ) {}
 
@@ -25,11 +25,21 @@ export class AuthGuard implements CanActivate {
     return this.checkLogin(url, route);
   }
   checkLogin(url: string = '/', route: ActivatedRouteSnapshot): boolean {
-    if (this._CookieService.check('Token')) {
-      // // Store the attempted URL for redirecting
-      // this._UserService.redirectUrl = url;
+    const currentUser = this.authService.userSubject.getValue();
 
-      // authorised so return true
+    if (this._CookieService.check('Token')) {
+      this.authService.redirectUrl = url;
+
+      if (
+        route.data.roles &&
+        route.data.roles.indexOf(currentUser.role) === -1
+      ) {
+        // role not authorized so redirect to home page
+        this.router.navigate(['/']);
+        return false;
+      }
+
+      // authorized so return true
       return true;
     }
 

@@ -19,6 +19,9 @@ import { UserSignUpComponent } from './pages/user-sign-up/user-sign-up.component
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { MainLayoutModule } from './layouts/main-layout/main-layout.module';
+import { WorkTimesComponent } from './pages/work-times/work-times.component';
+import { DoctorVisitsComponent } from './pages/doctor-visits/doctor-visits.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,8 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
     UserSignUpComponent,
     ProfileComponent,
     NavbarComponent,
+    WorkTimesComponent,
+    DoctorVisitsComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +44,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
     FormsModule,
     ToastrModule.forRoot(),
     CarouselModule,
+    MainLayoutModule,
   ],
   providers: [
     CookieService,
