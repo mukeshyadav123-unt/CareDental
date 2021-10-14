@@ -48,13 +48,13 @@
         </div>
       </form>
     </div>
-    <div class="day-card mb-4" *ngFor="let time of times">
+    <div class="day-card mb-4" *ngFor="let day of times | keyvalue">
       <div class="card">
         <div class="day-wrapper">
-          <h4 class="mr-5">5 October</h4>
-          <div class="slot" *ngFor="let i of [].constructor(4)">
-            <h5>3:00 - 4:00</h5>
-            <i class="far fa-trash-alt"></i>
+          <h4 class="mr-5">{{ day.key }}</h4>
+          <div class="slot" *ngFor="let time of times[$any(day.key)]">
+            <h5>{{ time.from }} - {{ time.to }}</h5>
+            <i class="far fa-trash-alt" (click)="deleteTime(time)"></i>
           </div>
         </div>
       </div>

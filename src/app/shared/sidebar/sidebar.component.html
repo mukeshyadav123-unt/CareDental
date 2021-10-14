@@ -11,11 +11,19 @@
     <i class="fas fa-user"></i>
     <span>Profile</span></a
   >
-  <a [routerLinkActive]="'active'" [routerLink]="['/times']">
+  <a
+    [routerLinkActive]="'active'"
+    [routerLink]="['/times']"
+    *ngIf="currentUser?.role == 'doctor'"
+  >
     <i class="fas fa-business-time"></i>
     <span>Work Times</span></a
   >
-  <a [routerLinkActive]="'active'" [routerLink]="['/visits']">
+  <a
+    [routerLinkActive]="'active'"
+    [routerLink]="['/visits']"
+    *ngIf="currentUser?.role == 'doctor'"
+  >
     <i class="fas fa-calendar-check"></i>
     <span>Visits</span></a
   >

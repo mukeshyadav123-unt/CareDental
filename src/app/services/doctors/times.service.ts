@@ -17,4 +17,9 @@ export class TimesService {
       time
     );
   }
+  deleteTime(id: any) {
+    return this.httpClient.delete(
+      `${environment.api}/api/doctor-routes/times/${id}`
+    );
+  }
 }
