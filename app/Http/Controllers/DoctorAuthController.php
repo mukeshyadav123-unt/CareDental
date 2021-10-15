@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DoctorLoginRequest;
 use App\Http\Requests\DoctorSignupRequest;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class DoctorAuthController extends Controller
@@ -17,7 +18,7 @@ class DoctorAuthController extends Controller
             ->first();
 
         abort_if(!$user, 400, 'wrong email or password');
-        abort_if(Hash::check($user->password , $request->password), 400, 'wrong email or password');
+        abort_if(Hash::check($user->password, $request->password), 400, 'wrong email or password');
         $token = $user->createToken($user->email, ['doctor'])->plainTextToken;
         return response()->json([
             'message' => 'success',
@@ -28,6 +29,13 @@ class DoctorAuthController extends Controller
     public function signup(DoctorSignupRequest $request)
     {
         $validated = $request->validated();
+        $validated['birthday'] = Carbon::parse($validated['birthday']);
+
+        abort_if($validated['birthday']->diffInYears(now()) < 21, 400
+            , 'you have be older than 21 to register for doctor account');
+        abort_if(User::where('phone_number', $validated['phone_number'])->first() != null,
+            400, 'phone already in use');
+
         $validated = array_merge($validated, ['type' => 'doctor']);
         $validated['password'] = Hash::make($validated['password']);
 
