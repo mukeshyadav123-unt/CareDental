@@ -15,6 +15,7 @@ class UpdateProfileRequest extends FormRequest
             'new_password' => ['min:6', 'confirmed'],
             'gender' => ['in:male,female,other'],
             'phone_number' => ['min:3'],
+            'birthday' => ['date']
         ];
     }
 

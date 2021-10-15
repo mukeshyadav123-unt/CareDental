@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -29,6 +30,7 @@ class ProfileController extends Controller
     {
         $validated = $request->validated();
         $authed_user = Auth::user();
+        $validated['birthday'] = Carbon::parse($validated['birthday']);
 
         if (!Hash::check($request->current_password, $authed_user->password)) {
             return response('current password is wrong', 401);
@@ -37,7 +39,13 @@ class ProfileController extends Controller
             $validated['new_password'] = Hash::make($validated['new_password']);
         }
 
-        $authed_user->update($validated);
+        try {
+            $authed_user->update($validated);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 400);
+        }
         return [
             'user' => $authed_user
         ];
