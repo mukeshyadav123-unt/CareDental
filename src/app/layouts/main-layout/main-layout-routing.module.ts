@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DoctorVisitsComponent } from 'src/app/pages/doctor-visits/doctor-visits.component';
-import { HomeComponent } from 'src/app/pages/home/home.component';
-import { ProfileComponent } from 'src/app/pages/profile/profile.component';
-import { WorkTimesComponent } from 'src/app/pages/work-times/work-times.component';
+import { DoctorVisitsComponent } from 'src/app/pages/doctor/doctor-visits/doctor-visits.component';
+import { HomeComponent } from 'src/app/pages/doctor/home/home.component';
+import { ProfileComponent } from 'src/app/pages/shared/profile/profile.component';
+import { WorkTimesComponent } from 'src/app/pages/doctor/work-times/work-times.component';
 import { AuthGuard } from 'src/app/_guard';
 
 const routes: Routes = [

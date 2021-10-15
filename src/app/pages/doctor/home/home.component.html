@@ -1,0 +1,37 @@
+<div class="card main-card">
+  <section id="home">
+    <div class="px-0">
+      <owl-carousel-o [options]="customOptions">
+        <ng-container *ngFor="let slide of slides; let i = index">
+          <ng-template carouselSlide [id]="i.toString()">
+            <div class="carousel-container">
+              <img [src]="slide.image" class="slider-img" />
+              <div class="captions">
+                <p>{{ slide.text }}</p>
+              </div>
+            </div>
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+    </div>
+  </section>
+  <section id="start">
+    <div class="overlay">
+      <h2 class="side-color section-title">LET'S START</h2>
+      <p class="description">
+        Lorem ipsum is simply dummy text of the printing and typesetting
+        industry.
+      </p>
+      <div class="steps">
+        <div class="row m-0">
+          <div class="col-lg-4 my-2" *ngFor="let step of steps">
+            <div class="step">
+              <img [src]="step.image" />
+              <p>{{ step.text }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

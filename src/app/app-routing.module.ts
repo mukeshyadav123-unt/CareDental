@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
-import { DoctorLoginComponent } from './pages/doctor-login/doctor-login.component';
-import { DoctorSignUpComponent } from './pages/doctor-sign-up/doctor-sign-up.component';
-import { PatientLoginComponent } from './pages/patient-login/patient-login.component';
-import { UserSignUpComponent } from './pages/user-sign-up/user-sign-up.component';
+import { DoctorLoginComponent } from './pages/doctor/doctor-login/doctor-login.component';
+import { DoctorSignUpComponent } from './pages/doctor/doctor-sign-up/doctor-sign-up.component';
+import { PatientLoginComponent } from './pages/patient/patient-login/patient-login.component';
+import { UserSignUpComponent } from './pages/patient/user-sign-up/user-sign-up.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },

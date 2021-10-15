@@ -1,0 +1,63 @@
+<div class="times">
+  <div class="card">
+    <div class="description">
+      <h4 class="mb-4 font-weight-bold main-color">Add New</h4>
+    </div>
+    <div class="new-form mb-4">
+      <form #timeForm="ngForm">
+        <div class="new-time">
+          <div class="form-group">
+            <label> Date </label>
+            <input
+              class="form-control"
+              name="date"
+              [(ngModel)]="newTime.date"
+              type="date"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label> From </label>
+            <input
+              class="form-control"
+              name="from"
+              [(ngModel)]="newTime.from"
+              type="time"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label> To </label>
+            <input
+              class="form-control"
+              name="to"
+              [(ngModel)]="newTime.to"
+              type="time"
+              required
+            />
+          </div>
+        </div>
+        <div class="btn-wrapper">
+          <button
+            class="btn form-control save-btn"
+            (click)="addNewTime()"
+            [disabled]="!timeForm.valid"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="day-card mb-4" *ngFor="let day of times | keyvalue">
+      <div class="card">
+        <div class="day-wrapper">
+          <h4 class="mr-5">{{ day.key }}</h4>
+          <div class="slot" *ngFor="let time of times[$any(day.key)]">
+            <h5>{{ time.from }} - {{ time.to }}</h5>
+            <i class="far fa-trash-alt" (click)="deleteTime(time)"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

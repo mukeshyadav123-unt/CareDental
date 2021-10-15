@@ -1,0 +1,62 @@
+.times {
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f5f5f5;
+  .card {
+    border-radius: 13px;
+    padding: 20px;
+    .save-btn {
+      max-width: 120px;
+      background-color: var(--side-color);
+      color: white;
+    }
+    .new-time {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2em;
+      .form-group {
+        flex: 1;
+      }
+    }
+    .day-card {
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      .day-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1em;
+        h4 {
+          margin: 0;
+          font-size: 18px;
+        }
+        .slot {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 1em;
+          background-color: #e6e6e6;
+          padding: 16px;
+          border-radius: 10px;
+          h5 {
+            margin-bottom: 0;
+            font-size: 16px;
+          }
+          i {
+            background-color: var(--main-color);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+.btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
