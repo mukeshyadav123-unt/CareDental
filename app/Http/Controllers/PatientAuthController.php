@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PatientLoginRequest;
 use App\Http\Requests\PatientSignupRequest;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class PatientAuthController extends Controller
@@ -30,6 +31,10 @@ class PatientAuthController extends Controller
         $validated = $request->validated();
         $validated = array_merge($validated, ['type' => 'patient']);
         $validated['password'] = Hash::make($validated['password']);
+        $validated['birthday'] = Carbon::parse($validated['birthday']);
+
+        abort_if(User::where('phone_number', $validated['phone_number'])->first() != null,
+            400, 'phone already in use');
 
         User::create($validated);
         return response()->json([
