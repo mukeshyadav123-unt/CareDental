@@ -1,0 +1,46 @@
+<div class="reservation">
+  <div class="card">
+    <h2 class="px-4 pb-0 pt-4 mb-0">Doctors</h2>
+    <div class="form-group px-4 search">
+      <input
+        type="text"
+        class="form-control"
+        (keyup)="onSearchChange($event)"
+        placeholder="Search by specialty"
+      />
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Specialty</th>
+          <th>Rate</th>
+          <th></th>
+        </tr>
+        <tr class="pointer" *ngFor="let doctor of doctors">
+          <td>{{ doctor?.name }}</td>
+          <td>{{ doctor?.phone_number }}</td>
+          <td>{{ doctor?.details?.specialty || "NA" }}</td>
+          <td>{{ doctor?.reviews_avg_rate }}</td>
+          <td>
+            <button class="btn save-btn" (click)="showDoctor(doctor)">
+              Reserve
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="pagination" *ngIf="pageData">
+      <button class="muted">&laquo;</button>
+      <button
+        (click)="changePage(i + 1)"
+        [ngClass]="{ active: i + 1 === pageData?.current_page }"
+        *ngFor="let page of [].constructor(pageData?.last_page); let i = index"
+      >
+        {{ i + 1 }}
+      </button>
+      <button class="muted">&raquo;</button>
+    </div>
+  </div>
+</div>

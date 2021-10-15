@@ -17,10 +17,37 @@ export class VisitsService {
       {}
     );
   }
+
   markVisitUndone(id: string | number) {
     return this.httpClient.put(
       `${environment.api}/api/doctor-routes/visit/${id}/not-done`,
       {}
     );
+  }
+
+  createVisit(body: any) {
+    return this.httpClient.post(`${environment.api}/api/patient/visit`, body);
+  }
+
+  reviewVisits(body: any, id: any) {
+    return this.httpClient.post(
+      `${environment.api}/api/patient/visit/${id}/review`,
+      body
+    );
+  }
+
+  cancelVisit(id: any) {
+    return this.httpClient.put(
+      `${environment.api}/api/patient/visit/${id}/cancel`,
+      {}
+    );
+  }
+
+  getPatientVisits(page = 1) {
+    return this.httpClient.get(`${environment.api}/api/patient/visit`, {
+      params: {
+        page: page.toString(),
+      },
+    });
   }
 }

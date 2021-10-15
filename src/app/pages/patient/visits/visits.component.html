@@ -1,0 +1,50 @@
+<div class="reservation">
+  <div class="card">
+    <h2 class="px-4 pb-0 pt-4 mb-4">My Visits</h2>
+
+    <div class="table-wrapper">
+      <table>
+        <tr>
+          <th>Doctor</th>
+          <th>Phone</th>
+          <th>Date</th>
+          <th>from</th>
+          <th>to</th>
+          <th></th>
+        </tr>
+        <tr class="pointer" *ngFor="let visit of visits">
+          <td>{{ visit?.doctor?.name }}</td>
+          <td>{{ visit?.doctor?.phone_number }}</td>
+          <td>{{ (visit?.doctorTime?.date | date: "mediumDate") || "NA" }}</td>
+          <td>{{ visit?.doctorTime?.from || "NA" }}</td>
+          <td>{{ visit?.doctorTime?.to || "NA" }}</td>
+          <td>
+            <div class="actions">
+              <button class="btn cancel-btn" (click)="cancelVisit(visit)">
+                Cancel
+              </button>
+              <button
+                class="btn save-btn"
+                (click)="reviewDoctor(visit)"
+                *ngIf="visit?.can_review"
+              >
+                Review
+              </button>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="pagination" *ngIf="pageData">
+      <button class="muted">&laquo;</button>
+      <button
+        (click)="changePage(i + 1)"
+        [ngClass]="{ active: i + 1 === pageData?.current_page }"
+        *ngFor="let page of [].constructor(pageData?.last_page); let i = index"
+      >
+        {{ i + 1 }}
+      </button>
+      <button class="muted">&raquo;</button>
+    </div>
+  </div>
+</div>

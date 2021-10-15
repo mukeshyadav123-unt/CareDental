@@ -5,6 +5,9 @@ import { HomeComponent } from 'src/app/pages/doctor/home/home.component';
 import { ProfileComponent } from 'src/app/pages/shared/profile/profile.component';
 import { WorkTimesComponent } from 'src/app/pages/doctor/work-times/work-times.component';
 import { AuthGuard } from 'src/app/_guard';
+import { ReservationsComponent } from 'src/app/pages/patient/reservations/reservations.component';
+import { DoctorPageComponent } from 'src/app/pages/doctor/doctor-page/doctor-page.component';
+import { VisitsComponent } from 'src/app/pages/patient/visits/visits.component';
 
 const routes: Routes = [
   {
@@ -28,6 +31,23 @@ const routes: Routes = [
     component: DoctorVisitsComponent,
     canActivate: [AuthGuard],
     data: { roles: ['doctor'] },
+  },
+  {
+    path: 'reservations',
+    component: ReservationsComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['user'] },
+  },
+  {
+    path: 'doctor/:id',
+    component: DoctorPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'user-visits',
+    component: VisitsComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['user'] },
   },
 ];
 

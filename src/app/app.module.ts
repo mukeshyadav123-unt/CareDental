@@ -22,6 +22,9 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { MainLayoutModule } from './layouts/main-layout/main-layout.module';
 import { WorkTimesComponent } from './pages/doctor/work-times/work-times.component';
 import { DoctorVisitsComponent } from './pages/doctor/doctor-visits/doctor-visits.component';
+import { ReservationsComponent } from './pages/patient/reservations/reservations.component';
+import { DoctorPageComponent } from './pages/doctor/doctor-page/doctor-page.component';
+import { VisitsComponent } from './pages/patient/visits/visits.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,9 @@ import { DoctorVisitsComponent } from './pages/doctor/doctor-visits/doctor-visit
     NavbarComponent,
     WorkTimesComponent,
     DoctorVisitsComponent,
+    ReservationsComponent,
+    DoctorPageComponent,
+    VisitsComponent,
   ],
   imports: [
     BrowserModule,

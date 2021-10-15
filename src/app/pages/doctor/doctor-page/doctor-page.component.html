@@ -1,0 +1,62 @@
+<section class="doctor">
+  <div class="card main" *ngIf="doctorData">
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+          <div class="card p-3 py-4">
+            <div class="text-center">
+              <img
+                src="../../../../assets/images/OQ6UTW0.jpg"
+                width="100"
+                class="rounded-circle"
+              />
+            </div>
+            <div class="text-center mt-3">
+              <span class="bg-secondary p-1 px-4 rounded text-white"
+                >{{ doctorData?.reviews_avg_rate }} <i class="fas fa-star"></i
+              ></span>
+              <h5 class="mt-2 mb-0">{{ doctorData?.name }}</h5>
+              <span class="side-color"
+                >Specialty: {{ doctorData?.details?.specialty }}</span
+              >
+              <div class="px-4 mt-1">
+                <p class="fonts">
+                  {{ doctorData?.details?.description || "NA" }}
+                </p>
+              </div>
+              <hr />
+              <h4 class="side-color">Reserve</h4>
+              <div
+                class="day-card mb-4"
+                *ngFor="let day of doctorData?.times?.data | keyvalue"
+              >
+                <div class="card">
+                  <div class="day-wrapper">
+                    <h4 class="mr-5">{{ day.key }}</h4>
+                    <div
+                      class="slot"
+                      [ngClass]="{ booked: time?.is_booked }"
+                      *ngFor="
+                        let time of doctorData?.times?.data[$any(day.key)]
+                      "
+                      (click)="reserve(time)"
+                    >
+                      <h5>
+                        {{ time.from }} - {{ time.to }}
+
+                        <i
+                          class="far fa-calendar-check"
+                          *ngIf="!time?.is_booked"
+                        ></i>
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
