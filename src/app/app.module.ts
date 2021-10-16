@@ -25,6 +25,7 @@ import { DoctorVisitsComponent } from './pages/doctor/doctor-visits/doctor-visit
 import { ReservationsComponent } from './pages/patient/reservations/reservations.component';
 import { DoctorPageComponent } from './pages/doctor/doctor-page/doctor-page.component';
 import { VisitsComponent } from './pages/patient/visits/visits.component';
+import { EmailVerificationComponent } from './pages/shared/email-verification/email-verification.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { VisitsComponent } from './pages/patient/visits/visits.component';
     ReservationsComponent,
     DoctorPageComponent,
     VisitsComponent,
+    EmailVerificationComponent,
   ],
   imports: [
     BrowserModule,

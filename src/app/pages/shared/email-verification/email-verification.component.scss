@@ -1,0 +1,31 @@
+.verify {
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f5f5f5;
+  .card {
+    border-radius: 13px;
+    padding: 20px;
+    .save-btn {
+      max-width: 120px;
+      background-color: var(--side-color);
+      color: white;
+    }
+  }
+  .code-input {
+    max-width: 250px;
+  }
+  .description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .save-btn {
+    max-width: 120px;
+    background-color: var(--side-color);
+    color: white;
+  }
+}
+.resend {
+  cursor: pointer;
+}

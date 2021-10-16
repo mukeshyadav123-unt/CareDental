@@ -8,6 +8,7 @@ import { AuthGuard } from 'src/app/_guard';
 import { ReservationsComponent } from 'src/app/pages/patient/reservations/reservations.component';
 import { DoctorPageComponent } from 'src/app/pages/doctor/doctor-page/doctor-page.component';
 import { VisitsComponent } from 'src/app/pages/patient/visits/visits.component';
+import { EmailVerificationComponent } from 'src/app/pages/shared/email-verification/email-verification.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,11 @@ const routes: Routes = [
     component: VisitsComponent,
     canActivate: [AuthGuard],
     data: { roles: ['user'] },
+  },
+  {
+    path: 'verify-email',
+    component: EmailVerificationComponent,
+    canActivate: [AuthGuard],
   },
 ];
 

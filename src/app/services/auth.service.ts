@@ -80,6 +80,16 @@ export class AuthService {
       );
   }
 
+  public verifyEmail(code: any): Observable<any> {
+    return this._HttpClient.post(`${environment.api}/api/verify-email`, {
+      code,
+    });
+  }
+
+  public resendCode(): Observable<any> {
+    return this._HttpClient.get(`${environment.api}/api/verify-email/resend`);
+  }
+
   public logout() {
     this._CookieService.delete('Token');
     this.router.navigate(['/doctor-login']);

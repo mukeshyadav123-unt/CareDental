@@ -1,0 +1,18 @@
+<section class="verify">
+  <div class="card">
+    <div class="description text-center">
+      <h4 class="mb-3 font-weight-bold main-color">Verify your email</h4>
+      <input
+        [(ngModel)]="code"
+        name="code"
+        class="form-control code-input"
+        placeholder="Code"
+        maxlength="4"
+      />
+      <button class="btn save-btn my-3" (click)="verifyEmail()">Confirm</button>
+      <p>
+        Didn't get the code? <a class="resend" (click)="resendCode()">Resend</a>
+      </p>
+    </div>
+  </div>
+</section>
