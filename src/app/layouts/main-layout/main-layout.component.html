@@ -1,4 +1,4 @@
-<app-sidebar></app-sidebar>
-<div class="wrapper">
+<app-sidebar *ngIf="currentUser?.role"></app-sidebar>
+<div [ngClass]="currentUser?.role ? 'wrapper' : 'wrapper-full'">
   <router-outlet></router-outlet>
 </div>

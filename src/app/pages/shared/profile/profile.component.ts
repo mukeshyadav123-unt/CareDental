@@ -17,10 +17,17 @@ export class ProfileComponent implements OnInit {
     new_password: '',
     new_password_confirmation: '',
   };
+
+  currentUser: any = null;
+
   constructor(
     private authService: AuthService,
     private customToastrService: CustomToastrService
-  ) {}
+  ) {
+    this.authService.userSubject.subscribe((user) => {
+      this.currentUser = user;
+    });
+  }
 
   ngOnInit(): void {
     this.getProfile();

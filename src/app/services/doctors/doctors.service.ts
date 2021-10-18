@@ -17,6 +17,10 @@ export class DoctorsService {
     });
   }
 
+  updateDetails(body: any) {
+    return this.httpClient.post(`${environment.api}/api/doctor/details`, body);
+  }
+
   getDoctor(id: string = '') {
     return this.httpClient.get(`${environment.api}/api/doctor/${id}`, {});
   }

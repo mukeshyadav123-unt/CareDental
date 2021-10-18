@@ -91,7 +91,7 @@ export class AuthService {
   }
 
   public logout() {
-    this._CookieService.delete('Token');
+    this._CookieService.deleteAll();
     this.router.navigate(['/doctor-login']);
     this.userSubject.next({});
     localStorage.clear();

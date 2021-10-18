@@ -22,7 +22,10 @@ export class PatientLoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.cookieService.check('Token')) {
+    if (
+      this.cookieService.check('Token') &&
+      this.authService.userSubject.getValue()?.role
+    ) {
       this.router.navigate(['/']);
     }
   }

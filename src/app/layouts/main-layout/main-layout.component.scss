@@ -2,6 +2,9 @@
   width: calc(100% - 220px);
   margin-left: auto;
 }
+.wrapper-full {
+  width: 100%;
+}
 
 @media screen and (max-width: 800px) {
   .wrapper {

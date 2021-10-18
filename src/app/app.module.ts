@@ -26,6 +26,8 @@ import { ReservationsComponent } from './pages/patient/reservations/reservations
 import { DoctorPageComponent } from './pages/doctor/doctor-page/doctor-page.component';
 import { VisitsComponent } from './pages/patient/visits/visits.component';
 import { EmailVerificationComponent } from './pages/shared/email-verification/email-verification.component';
+import { UpdateDetailsComponent } from './pages/doctor/update-details/update-details.component';
+import { ChatComponent } from './pages/shared/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { EmailVerificationComponent } from './pages/shared/email-verification/em
     DoctorPageComponent,
     VisitsComponent,
     EmailVerificationComponent,
+    UpdateDetailsComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,

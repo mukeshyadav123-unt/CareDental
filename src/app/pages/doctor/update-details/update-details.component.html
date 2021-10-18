@@ -1,0 +1,56 @@
+<div class="card">
+  <div class="description">
+    <h4 class="mb-4 font-weight-bold main-color">Update Details</h4>
+  </div>
+  <form #profileForm="ngForm">
+    <div class="row m-0">
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label> Specialty </label>
+          <input
+            class="form-control"
+            name="Specialty"
+            [(ngModel)]="profile.specialty"
+            required
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label> Address </label>
+          <input
+            class="form-control"
+            name="Address"
+            [(ngModel)]="profile.address"
+            type="text"
+            required
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label> Description </label>
+          <textarea
+            class="form-control"
+            name="description"
+            [(ngModel)]="profile.description"
+            type="text"
+            style="resize: none"
+            rows="5"
+            required
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="col-lg-12">
+        <button
+          class="btn form-control save-btn"
+          (click)="updateDetails()"
+          [disabled]="!profileForm.valid"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

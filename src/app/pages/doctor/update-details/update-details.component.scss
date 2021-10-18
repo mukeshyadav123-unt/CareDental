@@ -1,0 +1,9 @@
+.card {
+  border-radius: 13px;
+  padding: 20px;
+  .save-btn {
+    max-width: 120px;
+    background-color: var(--side-color);
+    color: white;
+  }
+}

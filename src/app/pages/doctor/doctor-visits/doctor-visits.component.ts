@@ -11,6 +11,10 @@ import { VisitsService } from 'src/app/services/doctors/visits.service';
 })
 export class DoctorVisitsComponent implements OnInit {
   visits: any = [];
+  patientReports: any = [];
+  loading = {
+    reports: false,
+  };
 
   constructor(
     private visitsService: VisitsService,
@@ -69,6 +73,19 @@ export class DoctorVisitsComponent implements OnInit {
     );
   }
 
+  showReports(id: any) {
+    this.loading.reports = true;
+    this.reportsService.getPatientReports(id).subscribe(
+      (res: any) => {
+        this.patientReports = res?.data;
+        this.loading.reports = false;
+      },
+      (_) => {
+        this.loading.reports = false;
+      }
+    );
+  }
+
   uploadReport(event: any, index: any) {
     const formData = new FormData();
     formData.append('patient_id', this.visits[index]?.patient?.id);
@@ -76,20 +93,21 @@ export class DoctorVisitsComponent implements OnInit {
 
     this.visits[index].uploading = true;
     this.reportsService.addReport(formData).subscribe(
-      (event) => {
-        if (event.type === HttpEventType.UploadProgress) {
+      (httpEvent) => {
+        if (httpEvent.type === HttpEventType.UploadProgress) {
           this.visits[index].progress = Math.round(
-            (100 * event.loaded) / (event.total || 1)
+            (100 * httpEvent.loaded) / (httpEvent.total || 1)
           );
         }
-        if (event.type === HttpEventType.Response) {
+        if (httpEvent.type === HttpEventType.Response) {
           this.customToastrService.showToast('Report Uploaded', 'Success');
           this.visits[index].uploading = false;
+          event.target.value = null;
         }
       },
       (err) => {
         this.visits[index].uploading = false;
-
+        event.target.value = null;
         this.customToastrService.showErrorToast(
           "Couldn't upload Report. File must be a PDF",
           'Failed'
