@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use function request;
 
 class ProfileController extends Controller
 {
@@ -17,7 +19,7 @@ class ProfileController extends Controller
 
     public function destroy()
     {
-        abort_if(!Hash::check(\request()->password, Auth::user()->password), 401, "invalid password");
+        abort_if(!Hash::check(request()->password, Auth::user()->password), 401, "invalid password");
         $authed_user = Auth::user();
         // delete all access tokens
         $authed_user->tokens()->delete();
@@ -41,7 +43,7 @@ class ProfileController extends Controller
 
         try {
             $authed_user->update($validated);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json([
                 'message' => $e->getMessage()
             ], 400);
