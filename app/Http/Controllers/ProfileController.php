@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateDetailsRequest;
 use App\Http\Requests\UpdateProfileRequest;
-use App\Models\User;
+use App\Http\Resources\DoctorResource;
+use App\Models\Doctor;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -38,19 +40,27 @@ class ProfileController extends Controller
             return response('current password is wrong', 401);
         }
         if (isset($validated['new_password'])) {
-            $validated['new_password'] = Hash::make($validated['new_password']);
+            $validated['password'] = Hash::make($validated['new_password']);
         }
 
         try {
             $authed_user->update($validated);
         } catch (Exception $e) {
             return response()->json([
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
             ], 400);
         }
         return [
-            'user' => $authed_user
+            'user' => $authed_user,
         ];
     }
 
+    public function updateDetails(UpdateDetailsRequest $request)
+    {
+ray()->showQueries();
+        $doctor = Doctor::find(auth()->id());
+        $doctor->details()->updateOrCreate([], $request->validated());
+        $doctor->load('details');
+        return new DoctorResource($doctor);
+    }
 }

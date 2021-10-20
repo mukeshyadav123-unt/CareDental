@@ -10,6 +10,8 @@ class DoctorDetails extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function doctor(): BelongsTo
     {
         return $this->belongsTo(Doctor::class);
