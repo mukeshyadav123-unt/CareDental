@@ -22,6 +22,7 @@
     "@fortawesome/fontawesome-free": "^5.15.2",
     "bootstrap": "^4.6.0",
     "jquery": "^3.5.1",
+    "ng-chat": "^3.1.0",
     "ngx-cookie-service": "^11.0.2",
     "ngx-owl-carousel-o": "^5.0.0",
     "ngx-toastr": "^13.2.0",

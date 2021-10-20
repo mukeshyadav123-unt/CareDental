@@ -28,6 +28,7 @@ import { VisitsComponent } from './pages/patient/visits/visits.component';
 import { EmailVerificationComponent } from './pages/shared/email-verification/email-verification.component';
 import { UpdateDetailsComponent } from './pages/doctor/update-details/update-details.component';
 import { ChatComponent } from './pages/shared/chat/chat.component';
+import { NgChatModule } from 'ng-chat';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { ChatComponent } from './pages/shared/chat/chat.component';
     ToastrModule.forRoot(),
     CarouselModule,
     MainLayoutModule,
+    NgChatModule,
   ],
   providers: [
     CookieService,
