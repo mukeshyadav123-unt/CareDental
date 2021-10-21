@@ -39,7 +39,7 @@ class DoctorTimesController extends Controller
         return new DoctorTimesResource($time);
     }
 
-    
+
     public function destroy(DoctorTimes $time)
     {
         $time->delete();

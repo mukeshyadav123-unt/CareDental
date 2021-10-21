@@ -22,6 +22,7 @@ class DoctorResource extends JsonResource
             'birthday' => $this->birthday,
             'created_at' => $this->created_at->diffForHumans(),
             'details' => new DoctorDetailsResource ($this->whenLoaded('details')),
+            'times' => DoctorTimesResource::collection($this->whenLoaded('times')),
         ];
     }
 }
