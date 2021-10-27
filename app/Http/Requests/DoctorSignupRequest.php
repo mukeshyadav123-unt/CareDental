@@ -13,7 +13,7 @@ class DoctorSignupRequest extends FormRequest
             'email' => ['required' , 'email' , 'unique:users,email'],
             'phone_number' =>  ['required' ,],
             'birthday' => ['required' , 'date' ],
-            'gender' => ['required'],
+//            'gender' => ['required'],
             'password' => ['required' , 'confirmed']
         ];
     }

@@ -14,8 +14,9 @@ class DoctorTimesController extends Controller
         $doctor = Doctor::find(auth()->id());
         $times = $doctor
             ->times()
-            ->orderBy('date', 'asc')
-            ->orderBy('from', 'asc')
+            ->orderBy('date')
+            ->orderBy('from')
+            ->orderBy('is_booked', 'desc')
             ->get();
         return DoctorTimesResource::collection($times);
     }

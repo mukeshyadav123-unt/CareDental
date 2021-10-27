@@ -13,7 +13,7 @@ class ShowDoctor
     public function handle(Doctor $doctor)
     {
         $doctor->load(['details', 'times']);
-//        return ($doctor);
+
         return new DoctorResource($doctor);
     }
 }

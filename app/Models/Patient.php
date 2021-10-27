@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Patient extends Model
 {
@@ -16,5 +17,9 @@ class Patient extends Model
         static::addGlobalScope('ancient', function (Builder $builder) {
             $builder->where('type', 'patient');
         });
+    }
+    public function visits(): HasMany
+    {
+        return $this->hasMany(Visit::class);
     }
 }

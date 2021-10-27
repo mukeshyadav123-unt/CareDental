@@ -2,23 +2,22 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class DoctorTimes extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
-
     protected $dates = ['date'];
+
     public function doctor(): BelongsTo
     {
         return $this->belongsTo(Doctor::class);
     }
-
 
     public function setToAttribute($to)
     {
@@ -28,5 +27,10 @@ class DoctorTimes extends Model
     public function setFromAttribute($from)
     {
         $this->attributes['from'] = optional($from)->toTimeString() ?? $from;
+    }
+
+    public function visit(): HasOne
+    {
+        return $this->hasOne(Visit::class);
     }
 }

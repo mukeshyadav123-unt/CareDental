@@ -37,4 +37,9 @@ class Doctor extends Model
             return $filters->apply($q);
         });
     }
+
+    public function visits(): HasMany
+    {
+        return $this->hasMany(Visit::class);
+    }
 }
