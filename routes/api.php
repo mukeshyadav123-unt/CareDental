@@ -2,13 +2,13 @@
 
 use App\Actions\Doctor\DoctorIndex;
 use App\Actions\Doctor\ShowDoctor;
+use App\Http\Controllers\Doctor\VisitController as DoctorVisitController;
 use App\Http\Controllers\DoctorAuthController;
 use App\Http\Controllers\DoctorTimesController;
 use App\Http\Controllers\Patient\VisitController;
 use App\Http\Controllers\PatientAuthController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\Doctor\VisitController as DoctorVisitController;
 
 Route::group(['prefix' => 'patient'], function () {
     Route::post('login', [PatientAuthController::class, 'login']);

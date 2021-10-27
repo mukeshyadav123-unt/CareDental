@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Patient;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Visit\StoreRequest;
 use App\Http\Resources\VisitResource;
+use App\Jobs\SendVisitConfirmationEmailJob;
 use App\Models\DoctorTimes;
 use App\Models\Patient;
 use App\Models\Visit;
@@ -35,6 +36,7 @@ class VisitController extends Controller
             'notes' => $request->notes,
         ]);
         $doctorTime->update(['is_booked' => true]);
+        SendVisitConfirmationEmailJob::dispatch($visit->id);
         return $this->show($visit);
     }
 }

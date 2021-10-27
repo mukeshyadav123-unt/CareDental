@@ -16,11 +16,10 @@ class DoctorResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'gender' => $this->gender,
             'phone_number' => $this->phone_number,
             'email' => $this->email,
             'birthday' => $this->birthday,
-            'created_at' => $this->created_at->diffForHumans(),
+            'created_at' => optional($this->created_at)->diffForHumans(),
             'details' => new DoctorDetailsResource ($this->whenLoaded('details')),
             'times' => DoctorTimesResource::collection($this->whenLoaded('times')),
         ];

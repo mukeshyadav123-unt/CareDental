@@ -12,7 +12,7 @@ class DoctorTimes extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-    protected $dates = ['date'];
+    protected $casts = ['is_booked' => 'boolean'];
 
     public function doctor(): BelongsTo
     {
