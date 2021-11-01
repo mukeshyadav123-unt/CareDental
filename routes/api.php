@@ -35,6 +35,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             Route::resource('times', DoctorTimesController::class);
             Route::group(['prefix' => 'visit'], function () {
                 Route::get('', [DoctorVisitController::class, 'index']);
+                Route::put('{visit}/done', [DoctorVisitController::class, 'markDone']);
+                Route::put('{visit}/not-done', [DoctorVisitController::class, 'markNotDone']);
+                Route::get('{visit}', [DoctorVisitController::class, 'show']);
             });
         });
     });
@@ -45,6 +48,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
                 Route::get('', [VisitController::class, 'index']);
                 Route::post('', [VisitController::class, 'store']);
                 Route::get('{visit}', [VisitController::class, 'show']);
+                Route::post('{visit}/review', [VisitController::class, 'addReview']);
             });
         });
     });

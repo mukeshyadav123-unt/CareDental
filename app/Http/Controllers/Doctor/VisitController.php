@@ -25,4 +25,22 @@ class VisitController extends Controller
         $visit->load(['patient', 'doctor', 'doctorTime']);
         return new VisitResource($visit);
     }
+
+    public function markDone(Visit $visit)
+    {
+        abort_if($visit->doctor_id != auth()->id(), 404, 'visit not found');
+        $visit->done = true;
+        $visit->save();
+        $visit->load(['patient', 'doctor', 'doctorTime']);
+        return new VisitResource($visit);
+    }
+
+    public function markNotDone(Visit $visit)
+    {
+        abort_if($visit->doctor_id != auth()->id(), 404, 'visit not found');
+        $visit->done = false;
+        $visit->save();
+        $visit->load(['patient', 'doctor', 'doctorTime']);
+        return new VisitResource($visit);
+    }
 }

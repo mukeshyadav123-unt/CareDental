@@ -22,6 +22,8 @@ class DoctorResource extends JsonResource
             'created_at' => optional($this->created_at)->diffForHumans(),
             'details' => new DoctorDetailsResource ($this->whenLoaded('details')),
             'times' => DoctorTimesResource::collection($this->whenLoaded('times')),
+            'reviews' => VisitReviewResource::collection($this->whenLoaded('reviews')),
+            'reviews_avg_rate' => round((float) $this->reviews_avg_rate, 2),
         ];
     }
 }

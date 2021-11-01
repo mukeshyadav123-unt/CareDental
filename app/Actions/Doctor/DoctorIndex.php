@@ -14,10 +14,11 @@ class DoctorIndex
     public function handle()
     {
         $filters = new DoctorsFilters(request());
-        ray()->showQueries();
+
         return DoctorResource::collection(
             Doctor::with('details')
-            ->filter($filters)
-            ->paginate());
+                ->withAggregate('reviews', 'rate')
+                ->filter($filters)
+                ->paginate());
     }
 }

@@ -12,8 +12,8 @@ class ShowDoctor
 
     public function handle(Doctor $doctor)
     {
-        $doctor->load(['details', 'times']);
-
+        $doctor->load(['details', 'times', 'reviews']);
+        $doctor->loadAvg('reviews', 'rate');
         return new DoctorResource($doctor);
     }
 }

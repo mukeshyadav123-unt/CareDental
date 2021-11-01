@@ -57,7 +57,7 @@ class ProfileController extends Controller
 
     public function updateDetails(UpdateDetailsRequest $request)
     {
-ray()->showQueries();
+
         $doctor = Doctor::find(auth()->id());
         $doctor->details()->updateOrCreate([], $request->validated());
         $doctor->load('details');

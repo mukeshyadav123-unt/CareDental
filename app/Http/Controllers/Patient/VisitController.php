@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Patient;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddVisitReviewRequest;
 use App\Http\Requests\Visit\StoreRequest;
 use App\Http\Resources\VisitResource;
+use App\Http\Resources\VisitReviewResource;
 use App\Jobs\SendVisitConfirmationEmailJob;
 use App\Models\DoctorTimes;
 use App\Models\Patient;
@@ -38,5 +40,15 @@ class VisitController extends Controller
         $doctorTime->update(['is_booked' => true]);
         SendVisitConfirmationEmailJob::dispatch($visit->id);
         return $this->show($visit);
+    }
+
+    public function addReview(AddVisitReviewRequest $request, Visit $visit)
+    {
+        abort_if(!$visit->done, 400, 'visit has to be marked as done by the doctor first');
+        abort_if($visit->patient_id != auth()->id(), 400, 'you can only review your visits');
+        abort_if($visit->reviews()->exists(), 400, "You already added your review");
+        $review = $visit->reviews()->create($request->validated());
+
+        return new VisitReviewResource($review);
     }
 }

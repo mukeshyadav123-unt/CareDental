@@ -8,12 +8,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Doctor extends Model
 {
     use HasFactory;
+
     protected $table = 'users';
+
     protected static function booted()
     {
         static::addGlobalScope('ancient', function (Builder $builder) {
@@ -41,5 +44,10 @@ class Doctor extends Model
     public function visits(): HasMany
     {
         return $this->hasMany(Visit::class);
+    }
+
+    public function reviews(): HasManyThrough
+    {
+        return $this->hasManyThrough(VisitReview::class, Visit::class);
     }
 }
