@@ -2,6 +2,7 @@
 
 use App\Actions\Doctor\DoctorIndex;
 use App\Actions\Doctor\ShowDoctor;
+use App\Http\Controllers\Doctor\ReportsController;
 use App\Http\Controllers\Doctor\VisitController as DoctorVisitController;
 use App\Http\Controllers\DoctorAuthController;
 use App\Http\Controllers\DoctorTimesController;
@@ -33,6 +34,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['middleware' => 'is_doctor'], function () {
         Route::group(['prefix' => 'doctor-routes'], function () {
             Route::resource('times', DoctorTimesController::class);
+            Route::group(['prefix' => 'reports'] , function (){
+               Route::get('{patient}' , [ReportsController::class , 'showReports']);
+               Route::post('' , [ReportsController::class , 'storeReport']);
+            });
             Route::group(['prefix' => 'visit'], function () {
                 Route::get('', [DoctorVisitController::class, 'index']);
                 Route::put('{visit}/done', [DoctorVisitController::class, 'markDone']);
@@ -44,6 +49,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::group(['middleware' => 'is_patient'], function () {
         Route::group(['prefix' => 'patient'], function () {
+            Route::group(['prefix' => 'reports'] , function (){
+                Route::get('' , [\App\Http\Controllers\Patient\ReportsController::class, 'index']);
+            });
             Route::group(['prefix' => 'visit'], function () {
                 Route::get('', [VisitController::class, 'index']);
                 Route::post('', [VisitController::class, 'store']);

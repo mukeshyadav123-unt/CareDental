@@ -50,4 +50,9 @@ class Doctor extends Model
     {
         return $this->hasManyThrough(VisitReview::class, Visit::class);
     }
+
+    public function reports(): HasMany
+    {
+        return $this->hasMany(Report::class);
+    }
 }

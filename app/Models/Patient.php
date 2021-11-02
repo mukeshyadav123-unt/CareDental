@@ -22,4 +22,10 @@ class Patient extends Model
     {
         return $this->hasMany(Visit::class);
     }
+
+    public function reports(): HasMany
+    {
+        return $this->hasMany(Report::class);
+    }
+
 }
