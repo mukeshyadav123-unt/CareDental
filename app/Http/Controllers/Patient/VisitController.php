@@ -11,6 +11,7 @@ use App\Jobs\SendVisitConfirmationEmailJob;
 use App\Models\DoctorTimes;
 use App\Models\Patient;
 use App\Models\Visit;
+use Carbon\Carbon;
 
 class VisitController extends Controller
 {
@@ -22,7 +23,16 @@ class VisitController extends Controller
 
     public function show(Visit $visit)
     {
+        abort_if($visit->patient_id != auth()->id(), 404, 'visit not found');
         $visit->load(['patient', 'doctor', 'doctorTime']);
+        return new VisitResource($visit);
+    }
+
+    public function cancel(Visit $visit)
+    {
+        abort_if($visit->patient_id != auth()->id(), 404, 'visit not found');
+        abort_if(!$this->canCancel($visit), 400, 'can only cancel a visit 24 hrs before');
+        $visit->delete();
         return new VisitResource($visit);
     }
 
@@ -50,5 +60,17 @@ class VisitController extends Controller
         $review = $visit->reviews()->create($request->validated());
 
         return new VisitReviewResource($review);
+    }
+
+    private function canCancel(Visit $visit): bool
+    {
+        if ($visit->done) {
+            return false;
+        }
+        //get the time of the visit
+        $timeSlot = $visit->doctorTime;
+        $visitTime = Carbon::parse($timeSlot->date . $timeSlot->from);
+        // can only cancel when it is more than 24 hrs early
+        return $visitTime->diffInHours(now()) >= 24;
     }
 }
