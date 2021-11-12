@@ -22,7 +22,6 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
-
     /**
      * The application's route middleware groups.
      *
@@ -44,7 +43,6 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
-
     /**
      * The application's route middleware.
      *
@@ -64,5 +62,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'is_doctor' => \App\Http\Middleware\IsDoctorMiddleware::class,
         'is_patient' => \App\Http\Middleware\IsPatientMiddleware::class,
+        'email-verified' => \App\Http\Middleware\WithVerifiedEmailMiddleware::class,
     ];
 }

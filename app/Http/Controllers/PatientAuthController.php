@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PatientLoginRequest;
 use App\Http\Requests\PatientSignupRequest;
+use App\Mail\LoginCodeMail;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Mail;
 
 class PatientAuthController extends Controller
 {
@@ -17,12 +19,12 @@ class PatientAuthController extends Controller
             ->first();
 
         abort_if(!$user, 400, 'wrong email or password');
-        abort_if(!Hash::check($request->password,$user->password ), 400, 'wrong email or password');
+        abort_if(!Hash::check($request->password, $user->password), 400, 'wrong email or password');
 
         $token = $user->createToken($user->email, ['patient'])->plainTextToken;
         return response()->json([
             'message' => 'success',
-            'token' => $token
+            'token' => $token,
         ]);
     }
 
@@ -36,9 +38,14 @@ class PatientAuthController extends Controller
         abort_if(User::where('phone_number', $validated['phone_number'])->first() != null,
             400, 'phone already in use');
 
-        User::create($validated);
+        $code = rand(1000, 9999);
+        $validated['login_code'] = $code;
+        $user = User::create($validated);
+        Mail::to([$user])->send(new LoginCodeMail([
+            'code' => $code,
+        ]));
         return response()->json([
-            'message' => 'user register successfully'
+            'message' => 'user register successfully',
         ]);
     }
 }

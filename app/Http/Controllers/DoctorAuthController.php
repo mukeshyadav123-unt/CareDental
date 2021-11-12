@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DoctorLoginRequest;
 use App\Http\Requests\DoctorSignupRequest;
+use App\Mail\LoginCodeMail;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Mail;
 
 class DoctorAuthController extends Controller
 {
-
     public function login(DoctorLoginRequest $request)
     {
         $user = User::where('email', $request->email)
@@ -22,7 +23,7 @@ class DoctorAuthController extends Controller
         $token = $user->createToken($user->email, ['doctor'])->plainTextToken;
         return response()->json([
             'message' => 'success',
-            'token' => $token
+            'token' => $token,
         ]);
     }
 
@@ -39,10 +40,14 @@ class DoctorAuthController extends Controller
         $validated = array_merge($validated, ['type' => 'doctor']);
         $validated['password'] = Hash::make($validated['password']);
 
-        User::create($validated);
-
+        $code = rand(1000, 9999);
+        $validated['login_code'] = $code;
+        $user = User::create($validated);
+        Mail::to([$user])->send(new LoginCodeMail([
+            'code' => $code,
+        ]));
         return response()->json([
-            'message' => 'user register successfully'
+            'message' => 'user register successfully',
         ]);
     }
 }

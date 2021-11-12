@@ -9,6 +9,7 @@ use App\Http\Controllers\DoctorTimesController;
 use App\Http\Controllers\Patient\VisitController;
 use App\Http\Controllers\PatientAuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VerifyLoginCodeController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'patient'], function () {
@@ -21,7 +22,8 @@ Route::group(['prefix' => 'doctor'], function () {
     Route::post('signup', [DoctorAuthController::class, 'signup']);
 });
 
-Route::group(['middleware' => 'auth:sanctum'], function () {
+Route::middleware('auth:sanctum')->post('verify-email', VerifyLoginCodeController::class);
+Route::middleware(['auth:sanctum', 'email-verified'])->group(function () {
     Route::get("me", [ProfileController::class, 'showMe']);
     Route::post("me/delete", [ProfileController::class, 'destroy']);
     Route::put("me", [ProfileController::class, 'update']);
@@ -34,9 +36,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['middleware' => 'is_doctor'], function () {
         Route::group(['prefix' => 'doctor-routes'], function () {
             Route::resource('times', DoctorTimesController::class);
-            Route::group(['prefix' => 'reports'] , function (){
-               Route::get('{patient}' , [ReportsController::class , 'showReports']);
-               Route::post('' , [ReportsController::class , 'storeReport']);
+            Route::group(['prefix' => 'reports'], function () {
+                Route::get('{patient}', [ReportsController::class, 'showReports']);
+                Route::post('', [ReportsController::class, 'storeReport']);
             });
             Route::group(['prefix' => 'visit'], function () {
                 Route::get('', [DoctorVisitController::class, 'index']);
@@ -49,8 +51,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::group(['middleware' => 'is_patient'], function () {
         Route::group(['prefix' => 'patient'], function () {
-            Route::group(['prefix' => 'reports'] , function (){
-                Route::get('' , [\App\Http\Controllers\Patient\ReportsController::class, 'index']);
+            Route::group(['prefix' => 'reports'], function () {
+                Route::get('', [\App\Http\Controllers\Patient\ReportsController::class, 'index']);
             });
             Route::group(['prefix' => 'visit'], function () {
                 Route::get('', [VisitController::class, 'index']);
