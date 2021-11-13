@@ -10,7 +10,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'doctor_time_id' => ['required', 'exists:doctor_times,id'],
-            'notes' => ['nullable']
+            'notes' => ['sometimes']
         ];
     }
 

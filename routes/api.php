@@ -22,7 +22,8 @@ Route::group(['prefix' => 'doctor'], function () {
     Route::post('signup', [DoctorAuthController::class, 'signup']);
 });
 
-Route::middleware('auth:sanctum')->post('verify-email', VerifyLoginCodeController::class);
+Route::middleware('auth:sanctum')->post('verify-email', [VerifyLoginCodeController::class, 'verify']);
+Route::middleware('auth:sanctum')->get('verify-email/resend', [VerifyLoginCodeController::class, 'resend']);
 Route::middleware(['auth:sanctum', 'email-verified'])->group(function () {
     Route::get("me", [ProfileController::class, 'showMe']);
     Route::post("me/delete", [ProfileController::class, 'destroy']);
@@ -59,6 +60,7 @@ Route::middleware(['auth:sanctum', 'email-verified'])->group(function () {
                 Route::post('', [VisitController::class, 'store']);
                 Route::get('{visit}', [VisitController::class, 'show']);
                 Route::post('{visit}/review', [VisitController::class, 'addReview']);
+                Route::put('{visit}/cancel', [VisitController::class, 'cancel']);
             });
         });
     });

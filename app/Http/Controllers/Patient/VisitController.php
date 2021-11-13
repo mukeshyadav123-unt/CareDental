@@ -18,7 +18,7 @@ class VisitController extends Controller
     public function index()
     {
         $patient = Patient::find(auth()->id());
-        return VisitResource::collection($patient->visits()->with(['patient', 'doctor', 'doctorTime']));
+        return VisitResource::collection($patient->visits()->with(['patient', 'doctor', 'doctorTime'])->paginate());
     }
 
     public function show(Visit $visit)
@@ -46,6 +46,7 @@ class VisitController extends Controller
             'patient_id' => $patient->id,
             'doctor_time_id' => $doctorTime->id,
             'notes' => $request->notes,
+            'price' => optional($doctorTime->doctor->details)->price ?? 0,
         ]);
         $doctorTime->update(['is_booked' => true]);
         SendVisitConfirmationEmailJob::dispatch($visit->id);
