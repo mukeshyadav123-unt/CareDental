@@ -17,7 +17,7 @@ class DoctorIndex
 
         return DoctorResource::collection(
             Doctor::with('details')
-                ->withAggregate('reviews', 'rate')
+                ->withAvg('reviews', 'rate')
                 ->filter($filters)
                 ->paginate());
     }

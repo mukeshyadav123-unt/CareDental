@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\DoctorTimesCollection;
 use App\Http\Resources\DoctorTimesResource;
 use App\Models\Doctor;
 use App\Models\DoctorTimes;
@@ -18,7 +19,7 @@ class DoctorTimesController extends Controller
             ->orderBy('from')
             ->orderBy('is_booked', 'desc')
             ->get();
-        return DoctorTimesResource::collection($times);
+        return new DoctorTimesCollection($times);
     }
 
     public function store(Request $request)
@@ -33,13 +34,11 @@ class DoctorTimesController extends Controller
         return new DoctorTimesResource($time);
     }
 
-
     public function update(Request $request, DoctorTimes $time)
     {
         $time->update($request->all());
         return new DoctorTimesResource($time);
     }
-
 
     public function destroy(DoctorTimes $time)
     {

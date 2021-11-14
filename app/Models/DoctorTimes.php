@@ -14,6 +14,7 @@ class DoctorTimes extends Model
 
     protected $guarded = ['id'];
     protected $casts = ['is_booked' => 'boolean'];
+    protected $dates = ['date'];
 
     public function doctor(): BelongsTo
     {
