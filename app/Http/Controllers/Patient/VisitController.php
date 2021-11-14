@@ -70,7 +70,8 @@ class VisitController extends Controller
         }
         //get the time of the visit
         $timeSlot = $visit->doctorTime;
-        $visitTime = Carbon::parse($timeSlot->date . ' ' . $timeSlot->from);
+
+        $visitTime = Carbon::parse($timeSlot->date->toDateString() . ' ' . $timeSlot->from);
         // can only cancel when it is more than 24 hrs early
         return $visitTime->diffInHours(now()) >= 24;
     }
