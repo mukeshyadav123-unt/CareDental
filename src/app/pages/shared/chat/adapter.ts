@@ -78,7 +78,7 @@ export class AllChatAdapter extends ChatAdapter {
     this.chatService
       .sendMessage(message, message?.toId)
       .subscribe((res: any) => {
-        console.log(res);
+        //console.log(res);
       });
   }
 }

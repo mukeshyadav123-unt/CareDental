@@ -21,31 +21,35 @@ export class UpdateDetailsComponent implements OnInit {
 
   formatBody(body: any): any {
     return {
-      specialty: body?.specialty,
-      address: body?.address,
-      description: body?.description,
+      details: {
+        specialty: body?.specialty,
+        address: body?.address,
+        description: body?.description,
+      },
     };
   }
 
   updateDetails() {
-    this.doctorsService.updateDetails(this.formatBody(this.profile)).subscribe(
-      (res: any) => {
-        this.customToastrService.showToast('Details Updated', 'Updated');
-        this.refresh.emit(true);
-      },
-      (err) => {
-        let errMsg = '';
-        if (err?.error?.errors)
-          for (const [key, value] of Object.entries(err?.error?.errors)) {
-            errMsg = value as any;
-            errMsg = errMsg[0];
-            break;
-          }
-        this.customToastrService.showErrorToast(
-          errMsg || "Couldn't Update Details",
-          'Failed'
-        );
-      }
-    );
+    this.authService
+      .updateDoctorProfile(this.formatBody(this.profile))
+      .subscribe(
+        (res: any) => {
+          this.customToastrService.showToast('Details Updated', 'Updated');
+          this.refresh.emit(true);
+        },
+        (err) => {
+          let errMsg = '';
+          if (err?.error?.errors)
+            for (const [key, value] of Object.entries(err?.error?.errors)) {
+              errMsg = value as any;
+              errMsg = errMsg[0];
+              break;
+            }
+          this.customToastrService.showErrorToast(
+            errMsg || "Couldn't Update Details",
+            'Failed'
+          );
+        }
+      );
   }
 }

@@ -101,7 +101,25 @@ export class AuthService {
     return this._HttpClient.get(`${environment.api}/api/me`);
   }
 
-  updateProfile(profile: any) {
-    return this._HttpClient.put(`${environment.api}/api/me`, profile);
+  updatePatientProfile(profile: any) {
+    return this._HttpClient.post(
+      `${environment.api}/api/patient/profile`,
+      profile
+    );
+  }
+
+  getPatientProfile() {
+    return this._HttpClient.get(`${environment.api}/api/patient/profile`);
+  }
+
+  updateDoctorProfile(profile: any) {
+    return this._HttpClient.post(
+      `${environment.api}/api/doctor-routes/profile`,
+      profile
+    );
+  }
+
+  getDoctorProfile() {
+    return this._HttpClient.get(`${environment.api}/api/doctor-routes/profile`);
   }
 }

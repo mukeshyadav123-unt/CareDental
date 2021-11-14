@@ -16,7 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { DoctorSignUpComponent } from './pages/doctor/doctor-sign-up/doctor-sign-up.component';
 import { UserSignUpComponent } from './pages/patient/user-sign-up/user-sign-up.component';
-import { ProfileComponent } from './pages/shared/profile/profile.component';
+import { ProfileComponent } from './pages/patient/profile/profile.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { MainLayoutModule } from './layouts/main-layout/main-layout.module';
@@ -29,6 +29,7 @@ import { EmailVerificationComponent } from './pages/shared/email-verification/em
 import { UpdateDetailsComponent } from './pages/doctor/update-details/update-details.component';
 import { ChatComponent } from './pages/shared/chat/chat.component';
 import { NgChatModule } from 'ng-chat';
+import { DoctorProfileComponent } from './pages/doctor/doctor-profile/doctor-profile.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { NgChatModule } from 'ng-chat';
     EmailVerificationComponent,
     UpdateDetailsComponent,
     ChatComponent,
+    DoctorProfileComponent,
   ],
   imports: [
     BrowserModule,

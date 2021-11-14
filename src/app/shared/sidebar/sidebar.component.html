@@ -9,8 +9,16 @@
   >
   <a
     [routerLinkActive]="'active'"
-    [routerLink]="['/profile']"
-    *ngIf="currentUser?.role"
+    [routerLink]="['/user-profile']"
+    *ngIf="currentUser?.role == 'user'"
+  >
+    <i class="fas fa-user"></i>
+    <span>Profile</span></a
+  >
+  <a
+    [routerLinkActive]="'active'"
+    [routerLink]="['/doctor-profile']"
+    *ngIf="currentUser?.role == 'doctor'"
   >
     <i class="fas fa-user"></i>
     <span>Profile</span></a
@@ -29,7 +37,7 @@
     *ngIf="currentUser?.role == 'doctor'"
   >
     <i class="fas fa-calendar-check"></i>
-    <span>Visits</span></a
+    <span>Appointments</span></a
   >
   <a
     [routerLinkActive]="'active'"
