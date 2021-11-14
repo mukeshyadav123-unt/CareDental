@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 /** @mixin \App\Models\Chat */
 class ChatResource extends JsonResource
 {
-    public function toArray(Request $request)
+    public function toArray($request)
     {
         return [
             'id' => $this->id,
@@ -16,6 +16,8 @@ class ChatResource extends JsonResource
             'doctor_id' => $this->doctor_id,
             'patient_id' => $this->patient_id,
             'other_sender' => $this->getSender(),
+            'unread_messages_count' => $this->unread_messages_count,
+            'messages' => ChatMessageResource::collection($this->whenLoaded('messages')),
         ];
     }
 

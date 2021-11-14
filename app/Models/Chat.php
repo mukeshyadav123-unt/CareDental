@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,6 +13,15 @@ class Chat extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    protected static function booted()
+    {
+        static::addGlobalScope('myChat', function (Builder $builder) {
+            $builder
+                ->where('patient_id', auth()->id())
+                ->orWhere('doctor_id', auth()->id());
+        });
+    }
 
     public function doctor(): BelongsTo
     {
@@ -25,6 +35,11 @@ class Chat extends Model
 
     public function messages(): HasMany
     {
-        return $this->hasMany(ChatMessage::class);
+        return $this->hasMany(ChatMessage::class)->orderByDesc('created_at');
+    }
+
+    public function unreadMessages(): HasMany
+    {
+        return $this->hasMany(ChatMessage::class)->where('seen', false);
     }
 }

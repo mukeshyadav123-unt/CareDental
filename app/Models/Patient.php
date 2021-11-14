@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Patient extends Model
 {
@@ -33,5 +34,10 @@ class Patient extends Model
     public function chats(): HasMany
     {
         return $this->hasMany(Chat::class)->orderByDesc('updated_at');
+    }
+
+    public function doctors(): HasManyThrough
+    {
+        return $this->hasManyThrough(Doctor::class, Visit::class, 'patient_id', 'id', 'id', 'doctor_id');
     }
 }

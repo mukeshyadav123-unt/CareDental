@@ -2,10 +2,12 @@
 
 use App\Actions\Doctor\DoctorIndex;
 use App\Actions\Doctor\ShowDoctor;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Doctor\ReportsController;
 use App\Http\Controllers\Doctor\VisitController as DoctorVisitController;
 use App\Http\Controllers\DoctorAuthController;
 use App\Http\Controllers\DoctorTimesController;
+use App\Http\Controllers\Patient\ChatController as PatientChatController;
 use App\Http\Controllers\Patient\VisitController;
 use App\Http\Controllers\PatientAuthController;
 use App\Http\Controllers\ProfileController;
@@ -63,5 +65,13 @@ Route::middleware(['auth:sanctum', 'email-verified'])->group(function () {
                 Route::put('{visit}/cancel', [VisitController::class, 'cancel']);
             });
         });
+    });
+
+    Route::group(['prefix' => 'chat'], function () {
+        Route::get('', [ChatController::class, 'index']);
+        Route::post('', [ChatController::class, 'sendMessage']);
+        Route::get('contact-list', [ChatController::class, 'contactsList']);
+        Route::get('unread-count', [ChatController::class, 'unreadMessagesCount']);
+        Route::get('{chat}', [ChatController::class, 'show']);
     });
 });

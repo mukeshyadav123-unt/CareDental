@@ -60,4 +60,9 @@ class Doctor extends Model
     {
         return $this->hasMany(Chat::class)->orderByDesc('updated_at');
     }
+
+    public function patients()
+    {
+        return $this->hasManyThrough(Patient::class, Visit::class, 'doctor_id' , 'id' , 'id', 'patient_id');
+    }
 }
