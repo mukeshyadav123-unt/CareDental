@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Patient extends Model
 {
     use HasFactory;
+
     protected $table = 'users';
 
     protected static function booted()
@@ -18,6 +19,7 @@ class Patient extends Model
             $builder->where('type', 'patient');
         });
     }
+
     public function visits(): HasMany
     {
         return $this->hasMany(Visit::class);
@@ -28,4 +30,8 @@ class Patient extends Model
         return $this->hasMany(Report::class);
     }
 
+    public function chats(): HasMany
+    {
+        return $this->hasMany(Chat::class)->orderByDesc('updated_at');
+    }
 }

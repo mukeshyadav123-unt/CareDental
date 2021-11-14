@@ -55,4 +55,9 @@ class Doctor extends Model
     {
         return $this->hasMany(Report::class);
     }
+
+    public function chats(): HasMany
+    {
+        return $this->hasMany(Chat::class)->orderByDesc('updated_at');
+    }
 }
