@@ -13,6 +13,7 @@ class ChatResource extends JsonResource
         return [
             'id' => $this->id,
             'last_message_at' => $this->updated_at,
+            'from_admin' => $this->admin_id != null,
             'doctor_id' => $this->doctor_id,
             'patient_id' => $this->patient_id,
             'other_sender' => $this->getSender(),
@@ -23,6 +24,18 @@ class ChatResource extends JsonResource
 
     private function getSender()
     {
+        if (auth()->user()->type == 'admin') {
+            if ($this->patient_id) {
+                return new PatientResource($this->whenLoaded('patient'));
+            }
+            return new DoctorResource($this->whenLoaded('doctor'));
+        }
+        if ($this->admin_id) {
+            return [
+                'name' => 'Admin',
+                'type' => 'admin',
+            ];
+        }
         if (auth()->user()->type == 'doctor') {
             return new PatientResource($this->whenLoaded('patient'));
         } else {

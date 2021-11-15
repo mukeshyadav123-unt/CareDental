@@ -18,8 +18,12 @@ class Chat extends Model
     {
         static::addGlobalScope('myChat', function (Builder $builder) {
             $builder
-                ->where('patient_id', auth()->id())
-                ->orWhere('doctor_id', auth()->id());
+                ->when(auth()->user(), function ($q) {
+                    $q->when(auth()->user()->type != 'admin', function ($query) {
+                        $query->where('patient_id', auth()->id())
+                            ->orWhere('doctor_id', auth()->id());
+                    });
+                });
         });
     }
 

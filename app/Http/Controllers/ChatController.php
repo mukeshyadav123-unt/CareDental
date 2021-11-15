@@ -5,12 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Interfaces\ChatControllerInterface;
 use App\Http\Controllers\Patient\ChatController as PatientChatController;
 use App\Http\Requests\SendMessageRequest;
-use App\Http\Resources\ChatMessageResource;
 use App\Http\Resources\ChatResource;
-use App\Http\Resources\DoctorResource;
 use App\Models\Chat;
-use App\Models\ChatMessage;
-use App\Models\Patient;
 
 class ChatController extends Controller implements ChatControllerInterface
 {
@@ -52,6 +48,8 @@ class ChatController extends Controller implements ChatControllerInterface
             return $this->controller = new Doctor\ChatController();
         } elseif (auth()->user()->type == 'patient') {
             return $this->controller = new PatientChatController();
+        } elseif (auth()->user()->type == 'admin') {
+            return $this->controller = new Admin\ChatController();
         } else {
             abort(404);
         }

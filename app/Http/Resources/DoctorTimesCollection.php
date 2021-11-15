@@ -18,7 +18,7 @@ class DoctorTimesCollection extends ResourceCollection
     private function parse()
     {
         $d = $this->collection->groupBy(function ($value) {
-            return $value->date->toDateString();
+            return $value->date->format('M,d Y');
         });
         return $d;
     }

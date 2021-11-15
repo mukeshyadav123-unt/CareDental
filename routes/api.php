@@ -2,6 +2,7 @@
 
 use App\Actions\Doctor\DoctorIndex;
 use App\Actions\Doctor\ShowDoctor;
+use App\Actions\AdminLogin;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Doctor\ReportsController;
 use App\Http\Controllers\Doctor\VisitController as DoctorVisitController;
@@ -17,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'patient'], function () {
     Route::post('login', [PatientAuthController::class, 'login']);
     Route::post('signup', [PatientAuthController::class, 'signup']);
+});
+
+Route::group(['prefix' => 'staff'], function () {
+    Route::post('login', AdminLogin::class);
 });
 
 Route::group(['prefix' => 'doctor'], function () {
@@ -68,6 +73,7 @@ Route::middleware(['auth:sanctum', 'email-verified'])->group(function () {
     });
 
     Route::group(['prefix' => 'chat'], function () {
+        ray()->showQueries();
         Route::get('', [ChatController::class, 'index']);
         Route::post('', [ChatController::class, 'sendMessage']);
         Route::get('contact-list', [ChatController::class, 'contactsList']);

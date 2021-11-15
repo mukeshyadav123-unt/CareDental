@@ -19,7 +19,8 @@ class DoctorAuthController extends Controller
             ->first();
 
         abort_if(!$user, 400, 'wrong email or password');
-        abort_if(Hash::check($user->password, $request->password), 400, 'wrong email or password');
+
+        abort_if(!Hash::check($request->password, $user->password), 400, 'wrong email or password');
         $token = $user->createToken($user->email, ['doctor'])->plainTextToken;
         return response()->json([
             'message' => 'success',

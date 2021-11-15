@@ -16,7 +16,12 @@ class ProfileController extends Controller
 {
     public function showMe()
     {
-        return response()->json(Auth::user());
+        $user = auth()->user();
+        if ($user->type == 'doctor') {
+            $user = Doctor::find($user->id);
+            $user->load('details');
+        }
+        return response()->json($user);
     }
 
     public function destroy()
@@ -57,7 +62,6 @@ class ProfileController extends Controller
 
     public function updateDetails(UpdateDetailsRequest $request)
     {
-
         $doctor = Doctor::find(auth()->id());
         $doctor->details()->updateOrCreate([], $request->validated());
         $doctor->load('details');
