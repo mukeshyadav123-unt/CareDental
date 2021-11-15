@@ -24,7 +24,7 @@
           <div class="col-lg-4 my-2" *ngFor="let step of steps">
             <div class="step">
               <img [src]="step.image" />
-              <p>{{ step.text }}</p>
+              <p [routerLink]="[step.url]">{{ step.text }}</p>
             </div>
           </div>
         </div>

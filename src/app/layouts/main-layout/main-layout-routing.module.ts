@@ -11,11 +11,16 @@ import { VisitsComponent } from 'src/app/pages/patient/visits/visits.component';
 import { EmailVerificationComponent } from 'src/app/pages/shared/email-verification/email-verification.component';
 import { ChatComponent } from 'src/app/pages/shared/chat/chat.component';
 import { DoctorProfileComponent } from 'src/app/pages/doctor/doctor-profile/doctor-profile.component';
+import { ContactUsComponent } from 'src/app/pages/shared/contact-us/contact-us.component';
 
 const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'contact-us',
+    component: ContactUsComponent,
   },
   {
     path: 'user-profile',

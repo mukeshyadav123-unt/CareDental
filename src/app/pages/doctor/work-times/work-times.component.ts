@@ -31,6 +31,7 @@ export class WorkTimesComponent implements OnInit {
       from: '',
       to: '',
       date: '',
+      type: '',
     });
   }
 

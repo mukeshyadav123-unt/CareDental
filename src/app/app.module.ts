@@ -30,6 +30,7 @@ import { UpdateDetailsComponent } from './pages/doctor/update-details/update-det
 import { ChatComponent } from './pages/shared/chat/chat.component';
 import { NgChatModule } from 'ng-chat';
 import { DoctorProfileComponent } from './pages/doctor/doctor-profile/doctor-profile.component';
+import { ContactUsComponent } from './pages/shared/contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { DoctorProfileComponent } from './pages/doctor/doctor-profile/doctor-pro
     UpdateDetailsComponent,
     ChatComponent,
     DoctorProfileComponent,
+    ContactUsComponent,
   ],
   imports: [
     BrowserModule,

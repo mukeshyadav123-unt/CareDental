@@ -1,0 +1,30 @@
+#contactUs {
+  position: relative;
+
+  .headline {
+    height: 600px;
+    background-color: var(--main-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      text-align: center;
+      color: white;
+      font-size: 5em;
+    }
+  }
+  .contacts {
+    position: absolute;
+    bottom: -20px;
+    right: 5%;
+    left: 5%;
+    background-color: white;
+    .contact {
+      border-right: 1px solid rgb(214, 214, 214);
+      padding: 60px 0 0;
+    }
+    i {
+      color: var(--main-color);
+    }
+  }
+}

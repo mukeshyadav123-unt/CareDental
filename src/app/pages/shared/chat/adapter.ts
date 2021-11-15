@@ -44,6 +44,10 @@ export class AllChatAdapter extends ChatAdapter {
           };
 
           participantResponse.participant = user;
+
+          participantResponse.metadata = {
+            totalUnreadMessages: user?.unread_messages_count || 0,
+          };
           return participantResponse;
         });
       })

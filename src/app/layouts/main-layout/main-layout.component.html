@@ -1,4 +1,13 @@
 <app-sidebar *ngIf="currentUser?.role"></app-sidebar>
 <div [ngClass]="currentUser?.role ? 'wrapper' : 'wrapper-full'">
+  <ng-chat
+    *ngIf="currentUser?.role"
+    [adapter]="chatAdapter"
+    [userId]="userId"
+    title="Chat"
+    messageDatePipeFormat="medium"
+    [isViewportOnMobileEnabled]="true"
+    [isCollapsed]="true"
+  ></ng-chat>
   <router-outlet></router-outlet>
 </div>

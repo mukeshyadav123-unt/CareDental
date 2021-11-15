@@ -6,35 +6,54 @@
     <div class="new-form mb-4">
       <form #timeForm="ngForm">
         <div class="new-time">
-          <div class="form-group">
-            <label> Date </label>
-            <input
-              class="form-control"
-              name="date"
-              [(ngModel)]="newTime.date"
-              type="date"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label> From </label>
-            <input
-              class="form-control"
-              name="from"
-              [(ngModel)]="newTime.from"
-              type="time"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label> To </label>
-            <input
-              class="form-control"
-              name="to"
-              [(ngModel)]="newTime.to"
-              type="time"
-              required
-            />
+          <div class="row m-0">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label> Date </label>
+                <input
+                  class="form-control"
+                  name="date"
+                  [(ngModel)]="newTime.date"
+                  type="date"
+                  required
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label> Type </label>
+                <input
+                  class="form-control"
+                  name="type"
+                  [(ngModel)]="newTime.type"
+                  required
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label> From </label>
+                <input
+                  class="form-control"
+                  name="from"
+                  [(ngModel)]="newTime.from"
+                  type="time"
+                  required
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label> To </label>
+                <input
+                  class="form-control"
+                  name="to"
+                  [(ngModel)]="newTime.to"
+                  type="time"
+                  required
+                />
+              </div>
+            </div>
           </div>
         </div>
         <div class="btn-wrapper">
@@ -52,9 +71,12 @@
       <div class="card">
         <div class="day-wrapper">
           <h4 class="mr-5">{{ day.key }}</h4>
-          <div class="slot" *ngFor="let time of times[$any(day.key)]">
-            <h5>{{ time.from }} - {{ time.to }}</h5>
-            <i class="far fa-trash-alt" (click)="deleteTime(time)"></i>
+          <div class="slot-wrapper" *ngFor="let time of times[$any(day.key)]">
+            <p class="type">Type: {{ time?.type || "NA" }}</p>
+            <div class="slot">
+              <h5>{{ time.from }} - {{ time.to }}</h5>
+              <i class="far fa-trash-alt" (click)="deleteTime(time)"></i>
+            </div>
           </div>
         </div>
       </div>
