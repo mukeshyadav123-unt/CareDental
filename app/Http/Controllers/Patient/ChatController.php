@@ -9,6 +9,7 @@ use App\Http\Resources\ChatMessageResource;
 use App\Http\Resources\ChatResource;
 use App\Http\Resources\DoctorResource;
 use App\Http\Resources\PatientResource;
+use App\Http\Resources\UserCollection;
 use App\Models\Chat;
 use App\Models\ChatMessage;
 use App\Models\Doctor;
@@ -27,7 +28,7 @@ class ChatController extends Controller implements ChatControllerInterface
     {
         $patient = Patient::find(auth()->id());
 
-        return DoctorResource::collection($patient->doctors);
+        return new UserCollection(DoctorResource::collection($patient->doctors));
     }
 
     public function show(Chat $chat): ChatResource

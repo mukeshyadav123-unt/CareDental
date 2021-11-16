@@ -7,7 +7,9 @@ use App\Http\Controllers\Interfaces\ChatControllerInterface;
 use App\Http\Requests\SendMessageRequest;
 use App\Http\Resources\ChatMessageResource;
 use App\Http\Resources\ChatResource;
+use App\Http\Resources\DoctorResource;
 use App\Http\Resources\PatientResource;
+use App\Http\Resources\UserCollection;
 use App\Models\Chat;
 use App\Models\ChatMessage;
 use App\Models\Doctor;
@@ -24,7 +26,7 @@ class ChatController extends Controller implements ChatControllerInterface
 
     public function unreadMessagesCount()
     {
-        $count = ChatMessage::query()->whereHas('chat', fn($q) => $q->where('doctor_id', auth()->id()))
+        $count = ChatMessage::query()->whereHas('chat', fn ($q) => $q->where('doctor_id', auth()->id()))
             ->where('seen', false)
             ->count();
         return response()->json([
@@ -44,8 +46,7 @@ class ChatController extends Controller implements ChatControllerInterface
     public function contactsList()
     {
         $doctor = Doctor::find(auth()->id());
-
-        return PatientResource::collection($doctor->patients);
+        return new UserCollection(DoctorResource::collection($doctor->patients));
     }
 
     public function sendMessage(SendMessageRequest $request)
