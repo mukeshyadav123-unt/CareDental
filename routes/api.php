@@ -82,7 +82,6 @@ Route::middleware(['auth:sanctum', 'email-verified'])->group(function () {
     });
 
     Route::group(['prefix' => 'chat'], function () {
-        ray()->showQueries();
         Route::get('', [ChatController::class, 'index']);
         Route::post('', [ChatController::class, 'sendMessage']);
         Route::get('contact-list', [ChatController::class, 'contactsList']);

@@ -18,6 +18,7 @@ class DoctorTimesResource extends JsonResource
             'date' => $this->date->format('M,d Y'),
             'from' => date("g:i a", strtotime(($this->from))),
             'to' => date("g:i a", strtotime(($this->to))),
+            'type' => $this->type,
             'is_booked' => $this->is_booked,
             'created_at' => $this->created_at,
             'doctor' => new DoctorResource($this->whenLoaded('doctor')),
