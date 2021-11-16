@@ -30,7 +30,7 @@
         (click)="logoutClicked()"
         *ngIf="currentUser.role"
       >
-        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span> <i class="fas fa-sign-out-alt ml-2"></i>
       </li>
 
       <li class="nav-item" *ngIf="!currentUser.role">

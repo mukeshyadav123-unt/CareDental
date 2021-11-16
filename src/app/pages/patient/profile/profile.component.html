@@ -49,31 +49,6 @@
             />
           </div>
         </div>
-
-        <div class="col-lg-6">
-          <div class="form-group">
-            <label> New Password </label>
-            <input
-              class="form-control"
-              name="new_password"
-              [(ngModel)]="profile.new_password"
-              type="password"
-            />
-            <small class="form-text text-muted">Optional</small>
-          </div>
-        </div>
-        <div class="col-lg-6"></div>
-        <div class="col-lg-6">
-          <div class="form-group">
-            <label> Confirm New Password </label>
-            <input
-              class="form-control"
-              name="new_password_confirm"
-              [(ngModel)]="profile.new_password_confirmation"
-              type="password"
-            />
-          </div>
-        </div>
         <div class="col-lg-6">
           <div class="form-group w-100">
             <label> Current Password </label>
@@ -88,6 +63,32 @@
             <small class="form-text text-muted">Required for validating.</small>
           </div>
         </div>
+        <div class="col-lg-6"></div>
+
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label> New Password </label>
+            <input
+              class="form-control"
+              name="new_password"
+              [(ngModel)]="profile.new_password"
+              type="password"
+            />
+            <small class="form-text text-muted">Optional</small>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label> Confirm New Password </label>
+            <input
+              class="form-control"
+              name="new_password_confirm"
+              [(ngModel)]="profile.new_password_confirmation"
+              type="password"
+            />
+          </div>
+        </div>
+
         <div class="col-lg-12">
           <button
             class="btn form-control save-btn"
@@ -219,7 +220,6 @@
             />
           </div>
         </div>
-      
 
         <div class="col-lg-12">
           <button
