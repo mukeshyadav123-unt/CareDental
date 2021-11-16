@@ -22,6 +22,8 @@ class VerifyLoginCodeController extends Controller
     {
         $user = auth()->user();
         abort_if($user->email_verified_at, 400, 'email already verified');
+        $code = rand(1000, 9999);
+        $user->update(['login_code' => $code]);
         Mail::to([$user])->send(new LoginCodeMail([
             'code' => $user->login_code,
         ]));

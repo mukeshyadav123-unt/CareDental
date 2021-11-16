@@ -43,6 +43,11 @@ Route::middleware(['auth:sanctum', 'email-verified'])->group(function () {
 
     Route::group(['middleware' => 'is_doctor'], function () {
         Route::group(['prefix' => 'doctor-routes'], function () {
+            Route::group(['prefix' => 'profile'], function () {
+                Route::get('', [\App\Http\Controllers\Doctor\ProfileController::class, 'getProfile']);
+                Route::post('', [\App\Http\Controllers\Doctor\ProfileController::class, 'update']);
+            });
+
             Route::resource('times', DoctorTimesController::class);
             Route::group(['prefix' => 'reports'], function () {
                 Route::get('{patient}', [ReportsController::class, 'showReports']);

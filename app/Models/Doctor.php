@@ -15,6 +15,7 @@ class Doctor extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
     protected $table = 'users';
 
     protected static function booted()
@@ -63,6 +64,6 @@ class Doctor extends Model
 
     public function patients()
     {
-        return $this->hasManyThrough(Patient::class, Visit::class, 'doctor_id' , 'id' , 'id', 'patient_id');
+        return $this->hasManyThrough(Patient::class, Visit::class, 'doctor_id', 'id', 'id', 'patient_id');
     }
 }
