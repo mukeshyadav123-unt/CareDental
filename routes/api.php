@@ -59,6 +59,10 @@ Route::middleware(['auth:sanctum', 'email-verified'])->group(function () {
 
     Route::group(['middleware' => 'is_patient'], function () {
         Route::group(['prefix' => 'patient'], function () {
+            Route::group(['prefix' => 'profile'], function () {
+                Route::get('', [\App\Http\Controllers\Patient\ProfileController::class, 'getProfile']);
+                Route::post('', [\App\Http\Controllers\Patient\ProfileController::class, 'update']);
+            });
             Route::group(['prefix' => 'reports'], function () {
                 Route::get('', [\App\Http\Controllers\Patient\ReportsController::class, 'index']);
             });
