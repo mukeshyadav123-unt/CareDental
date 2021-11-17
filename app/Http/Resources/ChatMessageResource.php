@@ -14,7 +14,7 @@ class ChatMessageResource extends JsonResource
             'id' => $this->id,
             'from_you' => $this->from == auth()->user()->type,
             'message' => $this->message,
-            'created_at' => $this->created_at,
+            'created_at' => optional($this->created_at)->diffForHumans(null, null, false, 2),
             'chat_id' => $this->chat_id,
 
             'chat' => new ChatResource($this->whenLoaded('chat')),

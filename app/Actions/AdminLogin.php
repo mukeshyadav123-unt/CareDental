@@ -26,9 +26,9 @@ class AdminLogin
 
     public function handle()
     {
-        $staff = Admin::query()->where('email', request()->email)->firstOrFail();
-        abort_if(!Hash::check(request()->password, $staff->password), 400, 'wrong email or password');
-        $token = $staff->createToken($staff->email, ['doctor'])->plainTextToken;
+        $admin = Admin::query()->where('email', request()->email)->firstOrFail();
+        abort_if(!Hash::check(request()->password, $admin->password), 400, 'wrong email or password');
+        $token = $admin->createToken($admin->email, ['doctor'])->plainTextToken;
         return response()->json([
             'message' => 'success',
             'token' => $token,

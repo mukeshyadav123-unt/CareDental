@@ -44,6 +44,9 @@ class Chat extends Model
 
     public function unreadMessages(): HasMany
     {
-        return $this->hasMany(ChatMessage::class)->where('seen', false);
+        return $this->hasMany(ChatMessage::class)
+            ->when(auth()->user()->type == 'doctor', fn ($q) => $q->where('seen_by_doctor', false))
+            ->when(auth()->user()->type == 'patient', fn ($q) => $q->where('seen_by_patient', false))
+            ->when(auth()->user()->type == 'admin', fn ($q) => $q->where('seen_by_admin', false));
     }
 }

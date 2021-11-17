@@ -27,7 +27,7 @@ class ChatController extends Controller implements ChatControllerInterface
     public function unreadMessagesCount()
     {
         $count = ChatMessage::query()->whereHas('chat', fn ($q) => $q->where('doctor_id', auth()->id()))
-            ->where('seen', false)
+            ->where('seen_by_doctor', false)
             ->count();
         return response()->json([
             'count' => $count,
@@ -36,7 +36,7 @@ class ChatController extends Controller implements ChatControllerInterface
 
     public function show(Chat $chat): ChatResource
     {
-        $chat->unreadMessages()->update(['seen' => true]);
+        $chat->unreadMessages()->update(['seen_by_doctor' => true]);
         $chat->load(['patient', 'messages'])
             ->loadCount('unreadMessages');
 

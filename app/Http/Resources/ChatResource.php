@@ -12,7 +12,7 @@ class ChatResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'last_message_at' => $this->updated_at,
+            'last_message_at' => $this->updated_at->format('M,d Y'),
             'from_admin' => $this->admin_id != null,
             'doctor_id' => $this->doctor_id,
             'patient_id' => $this->patient_id,
