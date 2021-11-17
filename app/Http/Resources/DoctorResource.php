@@ -18,6 +18,7 @@ class DoctorResource extends JsonResource
             'name' => $this->name,
             'phone_number' => $this->phone_number,
             'email' => $this->email,
+            'type' => $this->type,
             'birthday' => $this->birthday,
             'created_at' => optional($this->created_at)->diffForHumans(),
             'details' => new DoctorDetailsResource ($this->whenLoaded('details')),
