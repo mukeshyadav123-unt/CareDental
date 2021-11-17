@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { AuthService } from 'src/app/services/auth.service';
 
 interface Slide {
   image: string;
@@ -12,6 +13,8 @@ interface Slide {
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  currentUser: any = null;
+
   slides: Slide[] = [
     {
       image: '../../assets/images/successful-medical-team (1).jpg',
@@ -32,7 +35,7 @@ export class HomeComponent implements OnInit {
     {
       image: '../../assets/images/iconfinder_3_3319636.png',
       text: 'Appointments',
-      url: '/visits',
+      url: this.currentUser?.role == 'doctor' ? '/visits' : '/reservations',
     },
     {
       image:
@@ -74,7 +77,13 @@ export class HomeComponent implements OnInit {
     },
     nav: false,
   };
-  constructor() {}
 
+  constructor(private authService: AuthService) {
+    this.authService.userSubject.subscribe((user) => {
+      this.currentUser = user;
+      this.steps[0].url =
+        this.currentUser?.role == 'doctor' ? '/visits' : '/reservations';
+    });
+  }
   ngOnInit(): void {}
 }

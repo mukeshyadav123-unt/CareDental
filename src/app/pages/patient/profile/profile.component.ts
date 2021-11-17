@@ -31,7 +31,6 @@ export class ProfileComponent implements OnInit {
     home_phone_number: '',
     work_phone_number: '',
     address: '',
-    temp_address: '',
   };
 
   currentUser: any = null;
