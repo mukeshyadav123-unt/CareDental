@@ -40,6 +40,27 @@ export class AuthService {
         })
       );
   }
+
+  public forgotPassword(email: string): Observable<any> {
+    return this._HttpClient.post(
+      `${environment.api}/api/forgot-password`,
+      { email },
+      {
+        responseType: 'json',
+      }
+    );
+  }
+
+  public resetPassword(newPassword: any): Observable<any> {
+    return this._HttpClient.post(
+      `${environment.api}/api/reset-password`,
+      newPassword,
+      {
+        responseType: 'json',
+      }
+    );
+  }
+
   public userRegister(user: any): Observable<any> {
     return this._HttpClient
       .post(`${environment.api}/api/patient/signup`, user)

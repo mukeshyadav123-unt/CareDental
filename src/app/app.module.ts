@@ -31,6 +31,7 @@ import { ChatComponent } from './pages/shared/chat/chat.component';
 import { NgChatModule } from 'ng-chat';
 import { DoctorProfileComponent } from './pages/doctor/doctor-profile/doctor-profile.component';
 import { ContactUsComponent } from './pages/shared/contact-us/contact-us.component';
+import { ForgotPasswordComponent } from './pages/shared/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ContactUsComponent } from './pages/shared/contact-us/contact-us.compone
     ChatComponent,
     DoctorProfileComponent,
     ContactUsComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,

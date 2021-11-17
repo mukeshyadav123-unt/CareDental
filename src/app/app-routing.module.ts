@@ -5,6 +5,7 @@ import { DoctorLoginComponent } from './pages/doctor/doctor-login/doctor-login.c
 import { DoctorSignUpComponent } from './pages/doctor/doctor-sign-up/doctor-sign-up.component';
 import { PatientLoginComponent } from './pages/patient/patient-login/patient-login.component';
 import { UserSignUpComponent } from './pages/patient/user-sign-up/user-sign-up.component';
+import { ForgotPasswordComponent } from './pages/shared/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'user-signup',
     component: UserSignUpComponent,
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
   },
   {
     path: '',
