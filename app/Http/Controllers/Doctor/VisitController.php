@@ -15,6 +15,8 @@ class VisitController extends Controller
         $times = $doctor
             ->visits()
             ->with(['patient', 'doctor', 'doctorTime'])
+            ->when(request()->comming == 1, fn ($q) => $q->where('done', true))
+            ->orderByDesc('visits.created_at')
             ->get();
         return VisitResource::collection($times);
     }
