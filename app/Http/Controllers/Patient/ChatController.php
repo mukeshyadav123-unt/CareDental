@@ -29,12 +29,12 @@ class ChatController extends Controller implements ChatControllerInterface
     {
         $patient = Patient::find(auth()->id());
         $doctors = $patient->doctors()->distinct()->get();
-        $doctors = $doctors->map(function (Doctor &$patient) {
-            $patient->unread_messages_count = optional(Chat::where('patient_id', auth()->id())
-                    ->where('doctor_id', $patient->id)
+        $doctors = $doctors->map(function (Doctor &$doctor) {
+            $doctor->unread_messages_count = optional(Chat::where('patient_id', auth()->id())
+                    ->where('doctor_id', $doctor->id)
                     ->withCount('unreadMessages')
                     ->first())->unread_messages_count ?? 0;
-            return $patient;
+            return $doctor;
         });
         $admin = Admin::first();
         $admin->unread_messages_count = optional(Chat::where('doctor_id', auth()->id())

@@ -13,6 +13,7 @@ use App\Http\Resources\UserResource;
 use App\Models\Admin;
 use App\Models\Chat;
 use App\Models\ChatMessage;
+use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\User;
 
@@ -29,8 +30,26 @@ class ChatController extends Controller implements ChatControllerInterface
 
     public function contactsList()
     {
-        $users = User::query()->where('type', '!=', 'admin')->get();
-        return new UserCollection(UserResource::collection($users));
+        $doctors = Doctor::all();
+        $doctors = $doctors->map(function (Doctor &$doctor) {
+            $doctor->unread_messages_count = optional(Chat::whereNotNull('admin_id')
+                    ->where('doctor_id', $doctor->id)
+                    ->withCount('unreadMessages')
+                    ->first())->unread_messages_count ?? 0;
+            return $doctor;
+        });
+        $patients = Patient::all();
+        $patients = $patients->map(function (Patient &$patient) {
+            $patient->unread_messages_count = optional(Chat::whereNull('admin_id')
+                    ->where('patient_id', $patient->id)
+                    ->withCount('unreadMessages')
+                    ->first())->unread_messages_count ?? 0;
+            return $patient;
+        });
+        $doctors->each(function ($doctor) use ($patients) {
+            $patients->push($doctor);
+        });
+        return new UserCollection($patients);
     }
 
     public function show(Chat $chat): ChatResource
