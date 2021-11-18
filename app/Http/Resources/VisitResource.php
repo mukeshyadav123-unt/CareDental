@@ -7,13 +7,13 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /** @mixin \App\Models\Visit */
 class VisitResource extends JsonResource
 {
-
     public function toArray($request)
     {
         return [
             'id' => $this->id,
             'price' => $this->price,
             'notes' => $this->notes,
+            'doctor_note' => $this->doctor_note,
             'done' => $this->done,
             'can_review' => $this->can_review,
             'created_at' => optional($this->created_at)->diffForHumans(),
