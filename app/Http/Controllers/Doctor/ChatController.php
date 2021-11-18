@@ -10,11 +10,12 @@ use App\Http\Resources\ChatResource;
 use App\Http\Resources\DoctorResource;
 use App\Http\Resources\PatientResource;
 use App\Http\Resources\UserCollection;
+use App\Models\Admin;
 use App\Models\Chat;
 use App\Models\ChatMessage;
 use App\Models\Doctor;
 use App\Models\Patient;
-use Illuminate\Http\Request;
+use Illuminate\Database\Query\Builder;
 
 class ChatController extends Controller implements ChatControllerInterface
 {
@@ -46,7 +47,19 @@ class ChatController extends Controller implements ChatControllerInterface
     public function contactsList()
     {
         $doctor = Doctor::find(auth()->id());
-        return new UserCollection(DoctorResource::collection($doctor->patients));
+        $patients = $doctor->patients()->distinct()->get();
+        $patients = $patients->map(function (Patient &$patient) {
+            $patient->unread_messages_count = optional(Chat::where('doctor_id', auth()->id())
+                    ->where('patient_id', $patient->id)
+                    ->withCount('unreadMessages')
+                    ->first())->unread_messages_count ?? 0;
+            return $patient;
+        });
+        $admin = Admin::first();
+        $admin->unread_messages_count = optional(Chat::where('doctor_id', auth()->id())
+                ->whereNotNull('admin_id')->withCount('unreadMessages')->first())->unread_messages_count ?? 0;
+        $patients->push($admin);
+        return new UserCollection($patients);
     }
 
     public function sendMessage(SendMessageRequest $request)

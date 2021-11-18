@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\MissingValue;
 
 /** @mixin \App\Models\Patient */
 class PatientResource extends JsonResource
