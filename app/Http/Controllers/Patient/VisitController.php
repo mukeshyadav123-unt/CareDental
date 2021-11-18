@@ -20,6 +20,7 @@ class VisitController extends Controller
         $patient = Patient::find(auth()->id());
         $visits = $patient->visits()->with(['patient', 'doctor', 'doctorTime'])
             ->when(request()->comming == 1, fn ($q) => $q->where('done', true))
+            ->when(request()->comming == 0, fn ($q) => $q->where('done', false))
             ->paginate();
         return VisitResource::collection($visits);
     }
