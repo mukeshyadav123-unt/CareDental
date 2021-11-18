@@ -9,5 +9,7 @@ class UserResetPassword extends Model
 {
     use HasFactory;
 
+    public $timestamps = ['used_at', 'expire_at'];
+    protected $dates = ['used_at', 'expire_at'];
     protected $guarded = [];
 }

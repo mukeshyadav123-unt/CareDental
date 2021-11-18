@@ -7,15 +7,12 @@ use App\Http\Controllers\Interfaces\ChatControllerInterface;
 use App\Http\Requests\SendMessageRequest;
 use App\Http\Resources\ChatMessageResource;
 use App\Http\Resources\ChatResource;
-use App\Http\Resources\DoctorResource;
-use App\Http\Resources\PatientResource;
 use App\Http\Resources\UserCollection;
 use App\Models\Admin;
 use App\Models\Chat;
 use App\Models\ChatMessage;
 use App\Models\Doctor;
 use App\Models\Patient;
-use Illuminate\Database\Query\Builder;
 
 class ChatController extends Controller implements ChatControllerInterface
 {
@@ -38,8 +35,10 @@ class ChatController extends Controller implements ChatControllerInterface
     public function show(Chat $chat): ChatResource
     {
         $chat->unreadMessages()->update(['seen_by_doctor' => true]);
-        $chat->load(['patient', 'messages'])
-            ->loadCount('unreadMessages');
+        $chat->load(['patient', 'messages' => function ($q) {
+            return $q->orderBy('created_at');
+        }])
+            ->loadCount(['unreadMessages' => fn ($q) => $q->where('chat_id', $chat->id)]);
 
         return new ChatResource($chat);
     }
@@ -67,11 +66,15 @@ class ChatController extends Controller implements ChatControllerInterface
         $doctor = Doctor::find(auth()->id());
 
         $receiver = $doctor->patients()->where('users.id', $request->input('receiver_id'))
-            ->firstOrFail();
+            ->first();
+        if (!$receiver) {
+            $receiver = Admin::where('id', $request->input('receiver_id'))->firstOrFail();
+        }
         $chat = Chat::query()
-            ->where('doctor_id', $doctor->id)
-            ->where('patient_id', $receiver->id)
-            ->firstOrCreate();
+            ->firstOrCreate([
+                'doctor_id' => $doctor->id,
+                $receiver->type . '_id' => $receiver->id,
+            ]);
         $message = $chat->messages()->create([
             'from' => 'doctor',
             'message' => $request->input('message'),

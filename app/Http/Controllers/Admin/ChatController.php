@@ -56,7 +56,9 @@ class ChatController extends Controller implements ChatControllerInterface
     {
         $chat->unreadMessages()->update(['seen_by_admin' => true]);
 
-        $chat->load(['doctor', 'messages'])
+        $chat->load(['doctor', 'messages'  => function($q) {
+            return $q->orderBy('created_at');
+        }])
             ->loadCount('unreadMessages');
 
         return new ChatResource($chat);

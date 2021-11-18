@@ -66,14 +66,18 @@ class ChatController extends Controller implements ChatControllerInterface
     public function sendMessage(SendMessageRequest $request)
     {
         $patient = Patient::find(auth()->id());
-
+//todo::fix this to make patien able to send to admin
         $receiver = $patient->doctors()->where('users.id', $request->input('receiver_id'))
-            ->firstOrFail();
+            ->first();
+        if (!$receiver) {
+            $receiver = Admin::where('id', $request->input('receiver_id'))->firstOrFail();
+        }
         $chat = Chat::query()
             ->firstOrCreate([
-                'patient_id' => $patient->id,
-                'doctor_id' => $receiver->id,
-            ], []);
+                'doctor_id' => $patient->id,
+                $receiver->type . '_id' => $receiver->id,
+            ]);
+
         $message = $chat->messages()->create([
             'from' => 'patient',
             'message' => $request->input('message'),
