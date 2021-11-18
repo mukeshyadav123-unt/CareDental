@@ -48,7 +48,8 @@ class SendVisitConfirmationEmailJob implements ShouldQueue
         $relations = $patient->getRelations();
         $patient = (new PatientResource($patient))->toArray(null);
         unset($patient['details']);
-        Mail::to([$doctor, $patient])->send(new ConfirmEmailMail([
+        Mail::to([$doctor, $patient])
+            ->send(new ConfirmEmailMail([
             'visit' => $visit,
             'doctor' => $doctor,
             'patient' => $patient,

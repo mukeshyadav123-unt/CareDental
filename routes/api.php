@@ -1,19 +1,23 @@
 <?php
 
+use App\Actions\AdminLogin;
+use App\Actions\Auth\ResetPassword;
+use App\Actions\Auth\SendResetPasswordCode;
 use App\Actions\Doctor\DoctorIndex;
 use App\Actions\Doctor\ShowDoctor;
-use App\Actions\AdminLogin;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Doctor\ReportsController;
 use App\Http\Controllers\Doctor\VisitController as DoctorVisitController;
 use App\Http\Controllers\DoctorAuthController;
 use App\Http\Controllers\DoctorTimesController;
-use App\Http\Controllers\Patient\ChatController as PatientChatController;
 use App\Http\Controllers\Patient\VisitController;
 use App\Http\Controllers\PatientAuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VerifyLoginCodeController;
 use Illuminate\Support\Facades\Route;
+
+Route::post('forgot-password', SendResetPasswordCode::class)->middleware('guest');
+Route::post('reset-password', ResetPassword::class)->middleware('guest');
 
 Route::group(['prefix' => 'patient'], function () {
     Route::post('login', [PatientAuthController::class, 'login']);
