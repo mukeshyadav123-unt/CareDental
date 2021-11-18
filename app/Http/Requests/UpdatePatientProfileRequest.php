@@ -24,7 +24,7 @@ class UpdatePatientProfileRequest extends FormRequest
             'user' => ['array'],
             'user.name' => ['min:1', 'sometimes'],
             'user.email' => ['min:1', 'email', 'sometimes'],
-            'user.phone_number' => ['min:1', 'sometimes'],
+            'user.phone_number' => ['min:1', 'sometimes', 'unique:users,phone_number'],
             'user.birthday' => ['min:1', 'date'],
         ];
     }
