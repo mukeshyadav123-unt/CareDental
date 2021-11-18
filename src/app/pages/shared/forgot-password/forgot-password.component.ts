@@ -49,8 +49,7 @@ export class ForgotPasswordComponent implements OnInit {
           : "Couldn't send code";
         this.customToastrService.showErrorToast(errMsg, 'Failed');
 
-        //change this
-        this.showReset = true;
+        this.showReset = false;
       }
     );
   }
