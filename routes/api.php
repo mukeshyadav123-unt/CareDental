@@ -5,6 +5,7 @@ use App\Actions\Auth\ResetPassword;
 use App\Actions\Auth\SendResetPasswordCode;
 use App\Actions\Doctor\DoctorIndex;
 use App\Actions\Doctor\ShowDoctor;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Doctor\ReportsController;
 use App\Http\Controllers\Doctor\VisitController as DoctorVisitController;
@@ -91,5 +92,12 @@ Route::middleware(['auth:sanctum', 'email-verified'])->group(function () {
         Route::get('contact-list', [ChatController::class, 'contactsList']);
         Route::get('unread-count', [ChatController::class, 'unreadMessagesCount']);
         Route::get('{chat}', [ChatController::class, 'show']);
+    });
+
+    Route::group(['prefix' => 'staff', 'middleware' => 'is-admin'], function () {
+        Route::get('doctors', [AdminController::class, 'doctors'])->withoutMiddleware('email-verified');
+        Route::get('patients', [AdminController::class, 'patients'])->withoutMiddleware('email-verified');
+        Route::get('visits', [AdminController::class, 'visits'])->withoutMiddleware('email-verified');
+        Route::get('reports', [AdminController::class, 'reports'])->withoutMiddleware('email-verified');
     });
 });
