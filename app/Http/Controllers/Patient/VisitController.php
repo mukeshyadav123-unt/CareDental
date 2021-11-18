@@ -36,6 +36,7 @@ class VisitController extends Controller
     {
         abort_if($visit->patient_id != auth()->id(), 404, 'visit not found');
         abort_if(!$this->canCancel($visit), 400, 'can only cancel a visit 24 hrs before');
+        $visit->doctorTime->update(['is_booked' => false]);
         $visit->delete();
         return new VisitResource($visit);
     }
