@@ -15,6 +15,7 @@ use App\Http\Controllers\Patient\VisitController;
 use App\Http\Controllers\PatientAuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VerifyLoginCodeController;
+use App\Models\Patient;
 use Illuminate\Support\Facades\Route;
 
 Route::post('forgot-password', SendResetPasswordCode::class)->middleware('guest');
@@ -100,4 +101,12 @@ Route::middleware(['auth:sanctum', 'email-verified'])->group(function () {
         Route::get('visits', [AdminController::class, 'visits'])->withoutMiddleware('email-verified');
         Route::get('reports', [AdminController::class, 'reports'])->withoutMiddleware('email-verified');
     });
+});
+
+Route::get('test', function () {
+    return [
+        Patient::get()->toArray(),
+        'name' => env('DB_DATABASE'),
+    ];
+//    return \App\Models\Patient::get();
 });
