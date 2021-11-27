@@ -9,6 +9,39 @@
   >
   <a
     [routerLinkActive]="'active'"
+    [routerLink]="['/admin/visits']"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    <i class="fas fa-calendar-check"></i>
+    <span>Visits</span></a
+  >
+  <a
+    [routerLinkActive]="'active'"
+    [routerLink]="['/admin/doctors']"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    <i class="fas fa-user-md"></i>
+    <span>Doctors</span></a
+  >
+  <a
+    [routerLinkActive]="'active'"
+    [routerLink]="['/admin/reports']"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    <i class="fas fa-file-pdf"></i>
+    <span>Reports</span></a
+  >
+  <a
+    [routerLinkActive]="'active'"
+    [routerLink]="['/admin/patients']"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    <i class="fas fa-user"></i>
+    <span>Patients</span></a
+  >
+
+  <a
+    [routerLinkActive]="'active'"
     [routerLink]="['/user-profile']"
     *ngIf="currentUser?.role == 'user'"
   >

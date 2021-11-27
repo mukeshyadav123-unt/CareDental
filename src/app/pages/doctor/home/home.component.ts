@@ -18,16 +18,16 @@ export class HomeComponent implements OnInit {
   slides: Slide[] = [
     {
       image: '../../assets/images/successful-medical-team (1).jpg',
-      text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum',
+      text: '“Specialty care. we don’t compromise on the quality of care.” <br/> -CARE DENTAL HOME',
     },
     {
       image:
         '../../assets/images/curly-woman-cares-about-teeth-holds-dental-floss-surrounded-by-toothpaste-brushes.jpg',
-      text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum',
+      text: '“Specialty care. we don’t compromise on the quality of care.” <br/> -CARE DENTAL HOME',
     },
     {
       image: '../../assets/images/patient-login.jpg',
-      text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum',
+      text: '“Specialty care. we don’t compromise on the quality of care.” <br/> -CARE DENTAL HOME',
     },
   ];
 

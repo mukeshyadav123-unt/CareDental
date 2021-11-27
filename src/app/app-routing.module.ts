@@ -6,12 +6,17 @@ import { DoctorSignUpComponent } from './pages/doctor/doctor-sign-up/doctor-sign
 import { PatientLoginComponent } from './pages/patient/patient-login/patient-login.component';
 import { UserSignUpComponent } from './pages/patient/user-sign-up/user-sign-up.component';
 import { ForgotPasswordComponent } from './pages/shared/forgot-password/forgot-password.component';
+import { StaffLoginComponent } from './pages/staff/staff-login/staff-login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: 'doctor-login',
     component: DoctorLoginComponent,
+  },
+  {
+    path: 'staff-login',
+    component: StaffLoginComponent,
   },
   {
     path: 'user-login',

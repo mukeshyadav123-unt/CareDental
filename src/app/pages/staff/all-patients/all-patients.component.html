@@ -1,0 +1,32 @@
+<div class="wrapper">
+  <h2>Patients</h2>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>BirthDay</th>
+        <th>Date Joined</th>
+      </tr>
+      <tr class="pointer" *ngFor="let patient of patients">
+        <td>{{ patient?.name }}</td>
+        <td>{{ patient?.email }}</td>
+        <td>{{ patient?.phone_number }}</td>
+        <td>{{ patient?.birthday || "NA" }}</td>
+        <td>{{ patient?.created_at | date: "medium" }}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="pagination" *ngIf="pageData && pageData?.last_page > 1">
+    <button class="muted">&laquo;</button>
+    <button
+      (click)="changePage(i + 1)"
+      [ngClass]="{ active: i + 1 === pageData?.current_page }"
+      *ngFor="let page of [].constructor(pageData?.last_page); let i = index"
+    >
+      {{ i + 1 }}
+    </button>
+    <button class="muted">&raquo;</button>
+  </div>
+</div>

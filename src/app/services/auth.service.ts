@@ -89,6 +89,23 @@ export class AuthService {
         })
       );
   }
+  public staffLogin(staff: any): Observable<any> {
+    return this._HttpClient
+      .post(`${environment.api}/api/staff/login`, staff, {
+        responseType: 'json',
+      })
+      .pipe(
+        map((response: any) => {
+          if (response) {
+            this._CookieService.set('Token', response['token']);
+            const body = { role: 'staff' };
+            this.userSubject.next(body);
+            localStorage.setItem('currentUser-hospital', JSON.stringify(body));
+            this.router.navigate([this.redirectUrl]);
+          }
+        })
+      );
+  }
   public doctorRegister(user: any): Observable<any> {
     return this._HttpClient
       .post(`${environment.api}/api/doctor/signup`, user)

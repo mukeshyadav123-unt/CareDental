@@ -12,6 +12,10 @@ import { EmailVerificationComponent } from 'src/app/pages/shared/email-verificat
 import { ChatComponent } from 'src/app/pages/shared/chat/chat.component';
 import { DoctorProfileComponent } from 'src/app/pages/doctor/doctor-profile/doctor-profile.component';
 import { ContactUsComponent } from 'src/app/pages/shared/contact-us/contact-us.component';
+import { AllVisitsComponent } from 'src/app/pages/staff/all-visits/all-visits.component';
+import { AllDoctorsComponent } from 'src/app/pages/staff/all-doctors/all-doctors.component';
+import { AllReportsComponent } from 'src/app/pages/staff/all-reports/all-reports.component';
+import { AllPatientsComponent } from 'src/app/pages/staff/all-patients/all-patients.component';
 
 const routes: Routes = [
   {
@@ -72,6 +76,30 @@ const routes: Routes = [
     path: 'chat',
     component: ChatComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin/visits',
+    component: AllVisitsComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['staff'] },
+  },
+  {
+    path: 'admin/doctors',
+    component: AllDoctorsComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['staff'] },
+  },
+  {
+    path: 'admin/reports',
+    component: AllReportsComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['staff'] },
+  },
+  {
+    path: 'admin/patients',
+    component: AllPatientsComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['staff'] },
   },
 ];
 

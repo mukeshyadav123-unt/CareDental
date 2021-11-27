@@ -1,0 +1,34 @@
+<div class="wrapper">
+  <h2>Reports</h2>
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th>Patient</th>
+        <th>Doctor</th>
+        <th>Date Created</th>
+        <th>Link</th>
+      </tr>
+      <tr class="pointer" *ngFor="let report of reports">
+        <td>{{ report?.patient?.name }}</td>
+        <td>{{ report?.doctor?.name }}</td>
+        <td>{{ report?.created_at | date: "medium" }}</td>
+        <td>
+          <a [href]="report?.link" target="_blank" class="btn save-btn py-1"
+            >show</a
+          >
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="pagination" *ngIf="pageData && pageData?.last_page > 1">
+    <button class="muted">&laquo;</button>
+    <button
+      (click)="changePage(i + 1)"
+      [ngClass]="{ active: i + 1 === pageData?.current_page }"
+      *ngFor="let page of [].constructor(pageData?.last_page); let i = index"
+    >
+      {{ i + 1 }}
+    </button>
+    <button class="muted">&raquo;</button>
+  </div>
+</div>

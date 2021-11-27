@@ -7,7 +7,7 @@
             <div class="carousel-container">
               <img [src]="slide.image" class="slider-img" />
               <div class="captions">
-                <p>{{ slide.text }}</p>
+                <p [innerHtml]="slide.text"></p>
               </div>
             </div>
           </ng-template>

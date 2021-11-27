@@ -32,6 +32,11 @@ import { NgChatModule } from 'ng-chat';
 import { DoctorProfileComponent } from './pages/doctor/doctor-profile/doctor-profile.component';
 import { ContactUsComponent } from './pages/shared/contact-us/contact-us.component';
 import { ForgotPasswordComponent } from './pages/shared/forgot-password/forgot-password.component';
+import { StaffLoginComponent } from './pages/staff/staff-login/staff-login.component';
+import { AllVisitsComponent } from './pages/staff/all-visits/all-visits.component';
+import { AllDoctorsComponent } from './pages/staff/all-doctors/all-doctors.component';
+import { AllPatientsComponent } from './pages/staff/all-patients/all-patients.component';
+import { AllReportsComponent } from './pages/staff/all-reports/all-reports.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +59,11 @@ import { ForgotPasswordComponent } from './pages/shared/forgot-password/forgot-p
     DoctorProfileComponent,
     ContactUsComponent,
     ForgotPasswordComponent,
+    StaffLoginComponent,
+    AllVisitsComponent,
+    AllDoctorsComponent,
+    AllPatientsComponent,
+    AllReportsComponent,
   ],
   imports: [
     BrowserModule,
