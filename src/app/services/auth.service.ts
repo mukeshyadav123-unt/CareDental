@@ -98,7 +98,7 @@ export class AuthService {
         map((response: any) => {
           if (response) {
             this._CookieService.set('Token', response['token']);
-            const body = { role: 'staff' };
+            const body = { role: 'admin' };
             this.userSubject.next(body);
             localStorage.setItem('currentUser-hospital', JSON.stringify(body));
             this.router.navigate([this.redirectUrl]);

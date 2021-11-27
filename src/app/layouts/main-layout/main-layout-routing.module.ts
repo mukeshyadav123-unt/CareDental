@@ -81,25 +81,25 @@ const routes: Routes = [
     path: 'admin/visits',
     component: AllVisitsComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['staff'] },
+    data: { roles: ['admin'] },
   },
   {
     path: 'admin/doctors',
     component: AllDoctorsComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['staff'] },
+    data: { roles: ['admin'] },
   },
   {
     path: 'admin/reports',
     component: AllReportsComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['staff'] },
+    data: { roles: ['admin'] },
   },
   {
     path: 'admin/patients',
     component: AllPatientsComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['staff'] },
+    data: { roles: ['admin'] },
   },
 ];
 

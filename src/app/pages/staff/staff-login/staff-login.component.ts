@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-staff-login',
   templateUrl: './staff-login.component.html',
-  styleUrls: ['../all-patients/all-patients.component.scss'],
+  styleUrls: ['../../patient/patient-login/patient-login.component.scss'],
 })
 export class StaffLoginComponent implements OnInit {
   user = {
