@@ -105,8 +105,10 @@ Route::middleware(['auth:sanctum', 'email-verified'])->group(function () {
 
 Route::get('test', function () {
     return [
-        Patient::get()->toArray(),
+        Patient::first(),
+//        Patient::get()->toArray(),
         'name' => env('DB_DATABASE'),
+
     ];
 //    return \App\Models\Patient::get();
 });

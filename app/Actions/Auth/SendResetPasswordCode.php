@@ -18,7 +18,9 @@ class SendResetPasswordCode
         $user = User::query()
             ->where('email', request('email'))
             ->firstOrFail();
-        $userReset = $user->userResetPassword()->where('user_id', $user->id)->firstOrCreate();
+        $userReset = $user->userResetPassword()->where('user_id', $user->id)->firstOrCreate([], [
+            'code' => $this->generateRandomString(),
+        ]);
         $this->validate($userReset);
 
         $userReset->update([
@@ -52,7 +54,7 @@ class SendResetPasswordCode
     private function validate($userReset): void
     {
         abort_if(
-            $userReset && $userReset->used_at && $userReset->used_at->diffInMinutes(10),
+            $userReset && $userReset->used_at && $userReset->used_at->diffInMinutes(now()) < 10,
             400,
             'you reset your password less than 10 minutes ago, please wait'
         );
