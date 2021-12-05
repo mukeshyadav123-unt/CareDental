@@ -74,8 +74,8 @@ class ChatController extends Controller implements ChatControllerInterface
         }
         $chat = Chat::query()
             ->firstOrCreate([
-                'doctor_id' => $patient->id,
                 $receiver->type . '_id' => $receiver->id,
+		'patient_id' => auth()->id(),
             ]);
 
         $message = $chat->messages()->create([
