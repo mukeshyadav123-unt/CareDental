@@ -43,6 +43,7 @@ class DoctorAuthController extends Controller
 
         $code = rand(1000, 9999);
         $validated['login_code'] = $code;
+        $validated['is_verified'] = false;
         $user = User::create($validated);
         Mail::to([$user])->send(new LoginCodeMail([
             'code' => $code,

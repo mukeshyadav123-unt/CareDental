@@ -38,68 +38,75 @@ Route::group(['prefix' => 'doctor'], function () {
 Route::middleware('auth:sanctum')->post('verify-email', [VerifyLoginCodeController::class, 'verify']);
 Route::middleware('auth:sanctum')->get('verify-email/resend', [VerifyLoginCodeController::class, 'resend']);
 
-Route::middleware(['auth:sanctum', 'email-verified'])->group(function () {
-    Route::get("me", [ProfileController::class, 'showMe']);
-    Route::post("me/delete", [ProfileController::class, 'destroy']);
-    Route::put("me", [ProfileController::class, 'update']);
-    Route::group(['prefix' => 'doctor'], function () {
-        Route::get('', DoctorIndex::class);
-        Route::post('details', [ProfileController::class, 'updateDetails']);
-        Route::get('{doctor}', ShowDoctor::class);
-    });
+Route::middleware(['auth:sanctum', 'email-verified', 'verified-doctor'])
+    ->group(function () {
+        Route::get("me", [ProfileController::class, 'showMe']);
+        Route::post("me/delete", [ProfileController::class, 'destroy']);
+        Route::put("me", [ProfileController::class, 'update']);
+        Route::group(['prefix' => 'doctor'], function () {
+            Route::get('', DoctorIndex::class);
+            Route::post('details', [ProfileController::class, 'updateDetails']);
+            Route::get('{doctor}', ShowDoctor::class);
+        });
 
-    Route::group(['middleware' => 'is_doctor'], function () {
-        Route::group(['prefix' => 'doctor-routes'], function () {
-            Route::group(['prefix' => 'profile'], function () {
-                Route::get('', [\App\Http\Controllers\Doctor\ProfileController::class, 'getProfile']);
-                Route::post('', [\App\Http\Controllers\Doctor\ProfileController::class, 'update']);
-            });
+        Route::group(['middleware' => 'is_doctor'], function () {
+            Route::group(['prefix' => 'doctor-routes'], function () {
+                Route::group(['prefix' => 'profile'], function () {
+                    Route::get('', [\App\Http\Controllers\Doctor\ProfileController::class, 'getProfile']);
+                    Route::post('', [\App\Http\Controllers\Doctor\ProfileController::class, 'update']);
+                });
 
-            Route::resource('times', DoctorTimesController::class);
-            Route::group(['prefix' => 'reports'], function () {
-                Route::get('{patient}', [ReportsController::class, 'showReports']);
-                Route::post('', [ReportsController::class, 'storeReport']);
+                Route::resource('times', DoctorTimesController::class);
+                Route::group(['prefix' => 'reports'], function () {
+                    Route::get('{patient}', [ReportsController::class, 'showReports']);
+                    Route::post('', [ReportsController::class, 'storeReport']);
+                });
+                Route::group(['prefix' => 'visit'], function () {
+                    Route::get('', [DoctorVisitController::class, 'index']);
+                    Route::put('{visit}/done', [DoctorVisitController::class, 'markDone']);
+                    Route::put('{visit}/not-done', [DoctorVisitController::class, 'markNotDone']);
+                    Route::get('{visit}', [DoctorVisitController::class, 'show']);
+                });
             });
-            Route::group(['prefix' => 'visit'], function () {
-                Route::get('', [DoctorVisitController::class, 'index']);
-                Route::put('{visit}/done', [DoctorVisitController::class, 'markDone']);
-                Route::put('{visit}/not-done', [DoctorVisitController::class, 'markNotDone']);
-                Route::get('{visit}', [DoctorVisitController::class, 'show']);
+        });
+
+        Route::group(['middleware' => 'is_patient'], function () {
+            Route::group(['prefix' => 'patient'], function () {
+                Route::group(['prefix' => 'profile'], function () {
+                    Route::get('', [\App\Http\Controllers\Patient\ProfileController::class, 'getProfile']);
+                    Route::post('', [\App\Http\Controllers\Patient\ProfileController::class, 'update']);
+                });
+                Route::group(['prefix' => 'reports'], function () {
+                    Route::get('', [\App\Http\Controllers\Patient\ReportsController::class, 'index']);
+                });
+                Route::group(['prefix' => 'visit'], function () {
+                    Route::get('', [VisitController::class, 'index']);
+                    Route::post('', [VisitController::class, 'store']);
+                    Route::get('{visit}', [VisitController::class, 'show']);
+                    Route::post('{visit}/review', [VisitController::class, 'addReview']);
+                    Route::put('{visit}/cancel', [VisitController::class, 'cancel']);
+                });
+            });
+        });
+
+        Route::group(['prefix' => 'chat'], function () {
+            Route::get('', [ChatController::class, 'index']);
+            Route::post('', [ChatController::class, 'sendMessage']);
+            Route::get('contact-list', [ChatController::class, 'contactsList']);
+            Route::get('unread-count', [ChatController::class, 'unreadMessagesCount']);
+            Route::get('{chat}', [ChatController::class, 'show']);
+        });
+
+        Route::group(['prefix' => 'staff', 'middleware' => 'is-admin'], function () {
+            Route::get('doctors', [AdminController::class, 'doctors'])->withoutMiddleware('email-verified');
+            Route::get('patients', [AdminController::class, 'patients'])->withoutMiddleware('email-verified');
+            Route::get('visits', [AdminController::class, 'visits'])->withoutMiddleware('email-verified');
+            Route::get('reports', [AdminController::class, 'reports'])->withoutMiddleware('email-verified');
+            Route::post('verify-doctor/{doctor}', function (\App\Models\Doctor $doctor) {
+                $doctor->update(['is_verified' => true]);
+                return response()->json([
+                    'message' => 'doctor is now verified',
+                ]);
             });
         });
     });
-
-    Route::group(['middleware' => 'is_patient'], function () {
-        Route::group(['prefix' => 'patient'], function () {
-            Route::group(['prefix' => 'profile'], function () {
-                Route::get('', [\App\Http\Controllers\Patient\ProfileController::class, 'getProfile']);
-                Route::post('', [\App\Http\Controllers\Patient\ProfileController::class, 'update']);
-            });
-            Route::group(['prefix' => 'reports'], function () {
-                Route::get('', [\App\Http\Controllers\Patient\ReportsController::class, 'index']);
-            });
-            Route::group(['prefix' => 'visit'], function () {
-                Route::get('', [VisitController::class, 'index']);
-                Route::post('', [VisitController::class, 'store']);
-                Route::get('{visit}', [VisitController::class, 'show']);
-                Route::post('{visit}/review', [VisitController::class, 'addReview']);
-                Route::put('{visit}/cancel', [VisitController::class, 'cancel']);
-            });
-        });
-    });
-
-    Route::group(['prefix' => 'chat'], function () {
-        Route::get('', [ChatController::class, 'index']);
-        Route::post('', [ChatController::class, 'sendMessage']);
-        Route::get('contact-list', [ChatController::class, 'contactsList']);
-        Route::get('unread-count', [ChatController::class, 'unreadMessagesCount']);
-        Route::get('{chat}', [ChatController::class, 'show']);
-    });
-
-    Route::group(['prefix' => 'staff', 'middleware' => 'is-admin'], function () {
-        Route::get('doctors', [AdminController::class, 'doctors'])->withoutMiddleware('email-verified');
-        Route::get('patients', [AdminController::class, 'patients'])->withoutMiddleware('email-verified');
-        Route::get('visits', [AdminController::class, 'visits'])->withoutMiddleware('email-verified');
-        Route::get('reports', [AdminController::class, 'reports'])->withoutMiddleware('email-verified');
-    });
-});
