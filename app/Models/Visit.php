@@ -24,6 +24,10 @@ class Visit extends Model
     {
         return $this->belongsTo(Doctor::class);
     }
+    public function reports(): BelongsTo
+    {
+        return $this->belongsTo(Report::class);
+    }
 
     public function doctorTime(): BelongsTo
     {

@@ -18,7 +18,7 @@ class VisitController extends Controller
     public function index()
     {
         $patient = Patient::find(auth()->id());
-        $visits = $patient->visits()->with(['patient', 'doctor', 'doctorTime'])
+        $visits = $patient->visits()->with(['patient', 'doctor', 'doctorTime', 'reports'])
             ->orderBy('done')
             ->orderByDesc('created_at')
             ->paginate();

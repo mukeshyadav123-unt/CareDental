@@ -16,7 +16,7 @@ class ReportsController extends Controller
             $patient->reports()
                 ->when($request->doctor_id, fn ($q) => $q->where('doctor_id', $request->doctor_id))
                 ->with('doctor')
-                ->get()
+                ->paginate()
         );
     }
 }

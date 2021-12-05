@@ -18,6 +18,9 @@ class AdminController extends Controller
     public function doctors()
     {
         $doctors = Doctor::with(['visits', 'patients', 'reports'])
+	    ->when(request()->boolean('not_verified'), function ($q) {
+                return $q->where('is_verified', false);
+            })
             ->with('details')
             ->withAvg('reviews', 'rate')
             ->paginate();
