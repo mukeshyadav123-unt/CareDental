@@ -12,6 +12,7 @@ class ReportResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'note' => $this->note,
             'visit_id' => $this->visit_id,
             'link' => $this->link,
             'created_at' => $this->created_at,
