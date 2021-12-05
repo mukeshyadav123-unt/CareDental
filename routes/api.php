@@ -37,6 +37,7 @@ Route::group(['prefix' => 'doctor'], function () {
 
 Route::middleware('auth:sanctum')->post('verify-email', [VerifyLoginCodeController::class, 'verify']);
 Route::middleware('auth:sanctum')->get('verify-email/resend', [VerifyLoginCodeController::class, 'resend']);
+
 Route::middleware(['auth:sanctum', 'email-verified'])->group(function () {
     Route::get("me", [ProfileController::class, 'showMe']);
     Route::post("me/delete", [ProfileController::class, 'destroy']);
@@ -101,14 +102,4 @@ Route::middleware(['auth:sanctum', 'email-verified'])->group(function () {
         Route::get('visits', [AdminController::class, 'visits'])->withoutMiddleware('email-verified');
         Route::get('reports', [AdminController::class, 'reports'])->withoutMiddleware('email-verified');
     });
-});
-
-Route::get('test', function () {
-    return [
-        Patient::first(),
-//        Patient::get()->toArray(),
-        'name' => env('DB_DATABASE'),
-
-    ];
-//    return \App\Models\Patient::get();
 });

@@ -16,7 +16,7 @@ class VisitResource extends JsonResource
             'doctor_note' => $this->doctor_note,
             'done' => $this->done,
             'can_review' => $this->can_review,
-            'created_at' => optional($this->created_at)->diffForHumans(),
+            'created_at' => optional($this->created_at)->format('M,d Y H:i'),
             'doctor' => new DoctorResource($this->whenLoaded('doctor')),
             'doctorTime' => new DoctorTimesResource($this->whenLoaded('doctorTime')),
             'patient' => new PatientResource($this->whenLoaded('patient')),
