@@ -16,6 +16,7 @@ class DoctorResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+	    'is_verified' => $this->is_verified,
             'phone_number' => $this->phone_number,
             'email' => $this->email,
             'type' => $this->type,
