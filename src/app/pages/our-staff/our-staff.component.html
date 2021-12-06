@@ -3,83 +3,18 @@
   <section class="d-flex flex-wrap flex-column justify-content-center">
     <div class="d-flex flex-row flex-wrap justify-content-around">
       <!-- first profile -->
-      <div class="col-4">
+      <div class="col-4" *ngFor="let s of staff">
         <div class="d-flex flex-column align-items-center">
           <img
             src="../../../assets/images/OQ6UTW0.jpg"
             alt=""
             class="staff-image"
           />
-          <h4 class="staff-title">Ahmed Zoher</h4>
-          <p class="text-secondary my-0">ahmed_zoher@gmail.com</p>
-          <h6 class="text-primary">Consultant Orhodontist</h6>
+          <h4 class="staff-title">{{ s.name }}</h4>
+          <p class="text-secondary my-0">{{ s.email }}</p>
+          <h6 class="text-primary">{{ s.profession }}</h6>
           <br />
-          <p class="text-center">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere
-            amet sed, nam placeat expedita aperiam aspernatur facilis inventore
-            ipsam corrupti nostrum voluptas quaerat deserunt quos? Corrupti odio
-            quasi dolorum eligendi.
-          </p>
-        </div>
-      </div>
-      <!-- second profile -->
-      <div class="col-4">
-        <div class="d-flex flex-column align-items-center">
-          <img
-            src="../../../assets/images/OQ6UTW0.jpg"
-            alt=""
-            class="staff-image"
-          />
-          <h4 class="staff-title">Ahmed Zoher</h4>
-          <p class="text-secondary my-0">ahmed_zoher@gmail.com</p>
-          <h6 class="text-primary">Consultant Orhodontist</h6>
-          <br />
-          <p class="text-center">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere
-            amet sed, nam placeat expedita aperiam aspernatur facilis inventore
-            ipsam corrupti nostrum voluptas quaerat deserunt quos? Corrupti odio
-            quasi dolorum eligendi.
-          </p>
-        </div>
-      </div>
-      <!-- third profile -->
-      <div class="col-4">
-        <div class="d-flex flex-column align-items-center">
-          <img
-            src="../../../assets/images/OQ6UTW0.jpg"
-            alt=""
-            class="staff-image"
-          />
-          <h4 class="staff-title">Ahmed Zoher</h4>
-          <p class="text-secondary my-0">ahmed_zoher@gmail.com</p>
-          <h6 class="text-primary">Consultant Orhodontist</h6>
-          <br />
-          <p class="text-center">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere
-            amet sed, nam placeat expedita aperiam aspernatur facilis inventore
-            ipsam corrupti nostrum voluptas quaerat deserunt quos? Corrupti odio
-            quasi dolorum eligendi.
-          </p>
-        </div>
-      </div>
-      <!-- forth profile -->
-      <div class="col-4">
-        <div class="d-flex flex-column align-items-center">
-          <img
-            src="../../../assets/images/OQ6UTW0.jpg"
-            alt=""
-            class="staff-image"
-          />
-          <h4 class="staff-title">Ahmed Zoher</h4>
-          <p class="text-secondary my-0">ahmed_zoher@gmail.com</p>
-          <h6 class="text-primary">Consultant Orhodontist</h6>
-          <br />
-          <p class="text-center">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere
-            amet sed, nam placeat expedita aperiam aspernatur facilis inventore
-            ipsam corrupti nostrum voluptas quaerat deserunt quos? Corrupti odio
-            quasi dolorum eligendi.
-          </p>
+          <p class="text-center">{s.description}}</p>
         </div>
       </div>
     </div>
