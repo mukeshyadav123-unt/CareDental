@@ -5,16 +5,12 @@
       <!-- first profile -->
       <div class="col-4" *ngFor="let s of staff">
         <div class="d-flex flex-column align-items-center">
-          <img
-            src="../../../assets/images/OQ6UTW0.jpg"
-            alt=""
-            class="staff-image"
-          />
+          <img [src]="s.img" alt="" class="staff-image" />
           <h4 class="staff-title">{{ s.name }}</h4>
           <p class="text-secondary my-0">{{ s.email }}</p>
           <h6 class="text-primary">{{ s.profession }}</h6>
           <br />
-          <p class="text-center">{s.description}}</p>
+          <p class="text-center">{{ s.description }}</p>
         </div>
       </div>
     </div>
