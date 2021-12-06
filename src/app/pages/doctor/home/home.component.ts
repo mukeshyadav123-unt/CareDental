@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
     {
       image: '../../assets/images/iconfinder_3_3319636.png',
       text: 'Appointments',
-      url: this.currentUser?.role == 'doctor' ? '/visits' : '/reservations',
+      url: '',
     },
     {
       image:
@@ -45,8 +45,8 @@ export class HomeComponent implements OnInit {
     },
     {
       image: '../../assets/images/house-pngrepo-com.png',
-      text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum',
-      url: 'user',
+      text: 'Facilities',
+      url: '/facilities',
     },
   ];
 
@@ -82,7 +82,11 @@ export class HomeComponent implements OnInit {
     this.authService.userSubject.subscribe((user) => {
       this.currentUser = user;
       this.steps[0].url =
-        this.currentUser?.role == 'doctor' ? '/visits' : '/reservations';
+        this.currentUser?.role == 'doctor'
+          ? '/visits'
+          : this.currentUser?.role == 'admin'
+          ? '/admin/visits'
+          : '/reservations';
     });
   }
   ngOnInit(): void {}

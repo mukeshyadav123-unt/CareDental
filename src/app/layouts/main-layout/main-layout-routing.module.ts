@@ -16,6 +16,9 @@ import { AllDoctorsComponent } from 'src/app/pages/staff/all-doctors/all-doctors
 import { AllReportsComponent } from 'src/app/pages/staff/all-reports/all-reports.component';
 import { AllPatientsComponent } from 'src/app/pages/staff/all-patients/all-patients.component';
 import { MyReportsComponent } from 'src/app/pages/patient/my-reports/my-reports.component';
+import { FacilitiesComponent } from 'src/app/pages/facilities/facilities.component';
+import { AboutUsComponent } from 'src/app/pages/about-us/about-us.component';
+import { OurStaffComponent } from 'src/app/pages/our-staff/our-staff.component';
 
 const routes: Routes = [
   {
@@ -25,6 +28,18 @@ const routes: Routes = [
   {
     path: 'contact-us',
     component: ContactUsComponent,
+  },
+  {
+    path: 'facilities',
+    component: FacilitiesComponent,
+  },
+  {
+    path: 'about-us',
+    component: AboutUsComponent,
+  },
+  {
+    path: 'our-staff',
+    component: OurStaffComponent,
   },
   {
     path: 'user-profile',

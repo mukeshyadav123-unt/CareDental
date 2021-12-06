@@ -37,6 +37,9 @@ import { AllDoctorsComponent } from './pages/staff/all-doctors/all-doctors.compo
 import { AllPatientsComponent } from './pages/staff/all-patients/all-patients.component';
 import { AllReportsComponent } from './pages/staff/all-reports/all-reports.component';
 import { MyReportsComponent } from './pages/patient/my-reports/my-reports.component';
+import { FacilitiesComponent } from './pages/facilities/facilities.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { OurStaffComponent } from './pages/our-staff/our-staff.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +67,9 @@ import { MyReportsComponent } from './pages/patient/my-reports/my-reports.compon
     AllPatientsComponent,
     AllReportsComponent,
     MyReportsComponent,
+    FacilitiesComponent,
+    AboutUsComponent,
+    OurStaffComponent,
   ],
   imports: [
     BrowserModule,

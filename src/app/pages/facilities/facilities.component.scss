@@ -1,0 +1,35 @@
+.title {
+  color: #20344a;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.container {
+  padding: 3rem 0 3rem 0;
+}
+
+.card {
+  border: solid 1px #eee !important;
+  padding: 0 0 10px 0;
+  height: fit-content;
+}
+
+.card-title {
+  color: #20344a;
+  font-weight: 500;
+  font-size: 0.92rem;
+}
+.card-text {
+  font-size: 0.88rem;
+  font-weight: 400;
+}
+
+.staff-image {
+  width: 150px;
+  border-radius: 750px;
+}
+
+.staff-title {
+  margin: 0;
+  padding-top: 0.25rem;
+}
