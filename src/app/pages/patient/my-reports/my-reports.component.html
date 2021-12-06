@@ -1,20 +1,20 @@
 <div class="wrapper">
-  <h2>Doctors</h2>
+  <h2>Reports</h2>
   <div class="table-wrapper">
     <table>
       <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>BirthDay</th>
-        <th>Date Joined</th>
+        <th>Doctor</th>
+        <th>Date Created</th>
+        <th>Link</th>
       </tr>
-      <tr class="pointer" *ngFor="let doctor of doctors">
-        <td>{{ doctor?.name }}</td>
-        <td>{{ doctor?.email }}</td>
-        <td>{{ doctor?.phone_number }}</td>
-        <td>{{ doctor?.birthday || "NA" }}</td>
-        <td>{{ doctor?.created_at }}</td>
+      <tr class="pointer" *ngFor="let report of reports">
+        <td>{{ report?.doctor?.name }}</td>
+        <td>{{ report?.created_at | date: "medium" }}</td>
+        <td>
+          <a [href]="report?.link" target="_blank" class="btn save-btn py-1"
+            >show</a
+          >
+        </td>
       </tr>
     </table>
   </div>

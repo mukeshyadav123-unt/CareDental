@@ -9,13 +9,13 @@ import { ReservationsComponent } from 'src/app/pages/patient/reservations/reserv
 import { DoctorPageComponent } from 'src/app/pages/doctor/doctor-page/doctor-page.component';
 import { VisitsComponent } from 'src/app/pages/patient/visits/visits.component';
 import { EmailVerificationComponent } from 'src/app/pages/shared/email-verification/email-verification.component';
-import { ChatComponent } from 'src/app/pages/shared/chat/chat.component';
 import { DoctorProfileComponent } from 'src/app/pages/doctor/doctor-profile/doctor-profile.component';
 import { ContactUsComponent } from 'src/app/pages/shared/contact-us/contact-us.component';
 import { AllVisitsComponent } from 'src/app/pages/staff/all-visits/all-visits.component';
 import { AllDoctorsComponent } from 'src/app/pages/staff/all-doctors/all-doctors.component';
 import { AllReportsComponent } from 'src/app/pages/staff/all-reports/all-reports.component';
 import { AllPatientsComponent } from 'src/app/pages/staff/all-patients/all-patients.component';
+import { MyReportsComponent } from 'src/app/pages/patient/my-reports/my-reports.component';
 
 const routes: Routes = [
   {
@@ -57,6 +57,12 @@ const routes: Routes = [
     data: { roles: ['user'] },
   },
   {
+    path: 'user-reports',
+    component: MyReportsComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['user'] },
+  },
+  {
     path: 'doctor/:id',
     component: DoctorPageComponent,
     canActivate: [AuthGuard],
@@ -72,11 +78,7 @@ const routes: Routes = [
     component: EmailVerificationComponent,
     canActivate: [AuthGuard],
   },
-  {
-    path: 'chat',
-    component: ChatComponent,
-    canActivate: [AuthGuard],
-  },
+
   {
     path: 'admin/visits',
     component: AllVisitsComponent,

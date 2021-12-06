@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api: 'http://doctor-project-backend.test',
+  api: 'http://18.118.200.21',
 };
 
 /*

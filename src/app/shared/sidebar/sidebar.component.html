@@ -94,6 +94,14 @@
   >
   <a
     [routerLinkActive]="'active'"
+    [routerLink]="['/user-reports']"
+    *ngIf="currentUser?.role == 'user'"
+  >
+    <i class="fas fa-mobile-alt"></i>
+    <span>Reports</span></a
+  >
+  <a
+    [routerLinkActive]="'active'"
     [routerLink]="['/contact-us']"
     *ngIf="currentUser?.role"
   >

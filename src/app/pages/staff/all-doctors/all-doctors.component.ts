@@ -17,7 +17,7 @@ export class AllDoctorsComponent implements OnInit {
   }
 
   getPatients(page = 1) {
-    this.staffService.getPatients(page).subscribe((res: any) => {
+    this.staffService.getDoctors(page).subscribe((res: any) => {
       this.doctors = res?.data;
       this.pageData = res?.meta;
     });

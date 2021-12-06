@@ -31,11 +31,7 @@ export class AuthService {
       .pipe(
         map((response: any) => {
           if (response) {
-            this._CookieService.set('Token', response['token']);
-            const body = { role: 'user' };
-            this.userSubject.next(body);
-            localStorage.setItem('currentUser-hospital', JSON.stringify(body));
-            this.router.navigate([this.redirectUrl]);
+            this.setUserLocalStorage(response, 'user');
           }
         })
       );
@@ -80,15 +76,12 @@ export class AuthService {
       .pipe(
         map((response: any) => {
           if (response) {
-            this._CookieService.set('Token', response['token']);
-            const body = { role: 'doctor' };
-            this.userSubject.next(body);
-            localStorage.setItem('currentUser-hospital', JSON.stringify(body));
-            this.router.navigate([this.redirectUrl]);
+            this.setUserLocalStorage(response, 'doctor');
           }
         })
       );
   }
+
   public staffLogin(staff: any): Observable<any> {
     return this._HttpClient
       .post(`${environment.api}/api/staff/login`, staff, {
@@ -97,11 +90,7 @@ export class AuthService {
       .pipe(
         map((response: any) => {
           if (response) {
-            this._CookieService.set('Token', response['token']);
-            const body = { role: 'admin' };
-            this.userSubject.next(body);
-            localStorage.setItem('currentUser-hospital', JSON.stringify(body));
-            this.router.navigate([this.redirectUrl]);
+            this.setUserLocalStorage(response, 'admin');
           }
         })
       );
@@ -159,5 +148,13 @@ export class AuthService {
 
   getDoctorProfile() {
     return this._HttpClient.get(`${environment.api}/api/doctor-routes/profile`);
+  }
+
+  private setUserLocalStorage(response: any, role: string) {
+    this._CookieService.set('Token', response['token']);
+    const body = { role: role, id: response?.user_id };
+    this.userSubject.next(body);
+    localStorage.setItem('currentUser-hospital', JSON.stringify(body));
+    this.router.navigate([this.redirectUrl]);
   }
 }

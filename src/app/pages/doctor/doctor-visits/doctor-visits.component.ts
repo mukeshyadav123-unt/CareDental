@@ -15,6 +15,7 @@ export class DoctorVisitsComponent implements OnInit {
   loading = {
     reports: false,
   };
+  notes = '';
 
   constructor(
     private visitsService: VisitsService,
@@ -89,7 +90,9 @@ export class DoctorVisitsComponent implements OnInit {
   uploadReport(event: any, index: any) {
     const formData = new FormData();
     formData.append('patient_id', this.visits[index]?.patient?.id);
+    formData.append('visit_id', this.visits[index]?.id);
     formData.append('report', event.target.files[0]);
+    formData.append('note', this.notes);
 
     this.visits[index].uploading = true;
     this.reportsService.addReport(formData).subscribe(
@@ -103,6 +106,7 @@ export class DoctorVisitsComponent implements OnInit {
           this.customToastrService.showToast('Report Uploaded', 'Success');
           this.visits[index].uploading = false;
           event.target.value = null;
+          this.notes = '';
         }
       },
       (err) => {
@@ -114,6 +118,10 @@ export class DoctorVisitsComponent implements OnInit {
         );
       }
     );
+  }
+
+  openFileInput() {
+    document.getElementById('fileInput')?.click();
   }
 
   getAge(dateString: string) {

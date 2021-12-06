@@ -21,6 +21,9 @@ export class AllChatAdapter extends ChatAdapter {
     private authService: AuthService
   ) {
     super();
+    this.authService.userSubject.subscribe((user) => {
+      this.userId = user?.id;
+    });
   }
 
   listFriends(): any {
@@ -65,8 +68,10 @@ export class AllChatAdapter extends ChatAdapter {
         map((msgData: any) => {
           return msgData?.messages?.map((msg: any) => {
             msg = {
-              fromId: MessageType.Text,
-              toId: msgData?.doctor_id || msgData?.patient_id,
+              fromId: msg?.from_you ? this.userId : msgData?.other_sender?.id,
+
+              toId: msg?.from_you ? msgData?.other_sender?.id : this.userId,
+
               message: msg?.message,
               //   dateSent: msg?.created_at,
             };

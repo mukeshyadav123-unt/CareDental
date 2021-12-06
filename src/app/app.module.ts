@@ -27,7 +27,6 @@ import { DoctorPageComponent } from './pages/doctor/doctor-page/doctor-page.comp
 import { VisitsComponent } from './pages/patient/visits/visits.component';
 import { EmailVerificationComponent } from './pages/shared/email-verification/email-verification.component';
 import { UpdateDetailsComponent } from './pages/doctor/update-details/update-details.component';
-import { ChatComponent } from './pages/shared/chat/chat.component';
 import { NgChatModule } from 'ng-chat';
 import { DoctorProfileComponent } from './pages/doctor/doctor-profile/doctor-profile.component';
 import { ContactUsComponent } from './pages/shared/contact-us/contact-us.component';
@@ -37,6 +36,7 @@ import { AllVisitsComponent } from './pages/staff/all-visits/all-visits.componen
 import { AllDoctorsComponent } from './pages/staff/all-doctors/all-doctors.component';
 import { AllPatientsComponent } from './pages/staff/all-patients/all-patients.component';
 import { AllReportsComponent } from './pages/staff/all-reports/all-reports.component';
+import { MyReportsComponent } from './pages/patient/my-reports/my-reports.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +55,6 @@ import { AllReportsComponent } from './pages/staff/all-reports/all-reports.compo
     VisitsComponent,
     EmailVerificationComponent,
     UpdateDetailsComponent,
-    ChatComponent,
     DoctorProfileComponent,
     ContactUsComponent,
     ForgotPasswordComponent,
@@ -64,6 +63,7 @@ import { AllReportsComponent } from './pages/staff/all-reports/all-reports.compo
     AllDoctorsComponent,
     AllPatientsComponent,
     AllReportsComponent,
+    MyReportsComponent,
   ],
   imports: [
     BrowserModule,
