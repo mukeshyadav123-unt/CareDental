@@ -39,4 +39,11 @@ export class StaffService {
       },
     });
   }
+
+  approveDoctor(id: any) {
+    return this.httpClient.post(
+      `${environment.api}/api/staff/verify-doctor/${id}`,
+      {}
+    );
+  }
 }

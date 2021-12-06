@@ -8,6 +8,7 @@
         <th>Phone</th>
         <th>BirthDay</th>
         <th>Date Joined</th>
+        <th></th>
       </tr>
       <tr class="pointer" *ngFor="let doctor of doctors">
         <td>{{ doctor?.name }}</td>
@@ -15,6 +16,15 @@
         <td>{{ doctor?.phone_number }}</td>
         <td>{{ doctor?.birthday || "NA" }}</td>
         <td>{{ doctor?.created_at }}</td>
+        <td>
+          <button
+            class="btn save-btn"
+            *ngIf="!doctor?.is_verified"
+            (click)="approveDoctor(doctor.id)"
+          >
+            Approve
+          </button>
+        </td>
       </tr>
     </table>
   </div>
