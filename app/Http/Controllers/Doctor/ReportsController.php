@@ -27,6 +27,8 @@ class ReportsController extends Controller
         $report = $patient->reports()->create([
             'doctor_id' => auth()->id(),
             'link' => $url,
+	    'note' => $request->note,
+            'visit_id' => $request->visit_id,
         ]);
         return new ReportResource($report);
     }

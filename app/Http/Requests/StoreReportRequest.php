@@ -12,6 +12,7 @@ class StoreReportRequest extends FormRequest
             'patient_id' => ['required', 'numeric'],
             'report' => ['file', 'mimetypes:application/pdf', 'required'],
             'note' => ['nullable'],
+	    'visit_id' => ['exists:visits,id'],
         ];
     }
 
