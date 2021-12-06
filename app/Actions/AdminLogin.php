@@ -32,6 +32,7 @@ class AdminLogin
         return response()->json([
             'message' => 'success',
             'token' => $token,
+	    'user_id' =>$admin->id
         ]);
     }
 }

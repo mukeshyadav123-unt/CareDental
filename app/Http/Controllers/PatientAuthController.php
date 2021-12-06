@@ -25,6 +25,7 @@ class PatientAuthController extends Controller
         return response()->json([
             'message' => 'success',
             'token' => $token,
+	    'user_id' => $user->id,
         ]);
     }
 
