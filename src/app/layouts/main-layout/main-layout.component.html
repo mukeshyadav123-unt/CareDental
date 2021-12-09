@@ -8,6 +8,7 @@
     messageDatePipeFormat="medium"
     [isViewportOnMobileEnabled]="true"
     [isCollapsed]="true"
+    (onParticipantChatClosed)="clearRefresh($event)"
   ></ng-chat>
   <router-outlet></router-outlet>
 </div>

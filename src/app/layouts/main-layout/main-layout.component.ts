@@ -26,5 +26,9 @@ export class MainLayoutComponent implements OnInit {
     this.chatAdapter = new AllChatAdapter(this.chatService, this.authService);
   }
 
+  clearRefresh(event: any) {
+    clearInterval(this.chatAdapter.interval);
+  }
+
   ngOnInit(): void {}
 }
