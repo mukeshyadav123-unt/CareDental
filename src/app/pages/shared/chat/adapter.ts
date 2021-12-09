@@ -7,13 +7,14 @@ import {
   MessageType,
   ParticipantResponse,
 } from 'ng-chat';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of, interval, Subject, BehaviorSubject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
 
 export class AllChatAdapter extends ChatAdapter {
   public userId!: string;
+  public interval: any;
   public contactsList: any = [];
 
   constructor(
@@ -57,30 +58,50 @@ export class AllChatAdapter extends ChatAdapter {
     );
   }
 
+  onParticipantChatClosed(participant: IChatParticipant) {
+    this.interval?.clear();
+  }
+
   getMessageHistory(destinationId: any): Observable<Message[]> {
     const selectedContact = this.contactsList?.find((c: any) => {
       return c?.id === destinationId;
     });
 
-    if (selectedContact?.chat_id)
-      return this.chatService.getHistory(selectedContact?.chat_id).pipe(
+    var subject = new BehaviorSubject<Message[]>([]);
+    if (selectedContact?.chat_id) {
+      this.interval = setInterval(() => {
+        subject.next([]);
+        this.getAllMessages(selectedContact, subject);
+      }, 5000);
+      this.getAllMessages(selectedContact, subject);
+
+      return subject.asObservable();
+    } else return of([]);
+  }
+
+  getAllMessages(selectedContact: any, subject: any) {
+    this.chatService
+      .getHistory(selectedContact?.chat_id)
+      .pipe(
         map((res: any) => res?.data),
-        map((msgData: any) => {
-          return msgData?.messages?.map((msg: any) => {
-            msg = {
-              fromId: msg?.from_you ? this.userId : msgData?.other_sender?.id,
+        tap((msgData: any) => {
+          subject.next(
+            msgData?.messages?.map((msg: any) => {
+              msg = {
+                fromId: msg?.from_you ? this.userId : msgData?.other_sender?.id,
 
-              toId: msg?.from_you ? msgData?.other_sender?.id : this.userId,
+                toId: msg?.from_you ? msgData?.other_sender?.id : this.userId,
 
-              message: msg?.message,
-              //   dateSent: msg?.created_at,
-            };
+                message: msg?.message,
+                //   dateSent: msg?.created_at,
+              };
 
-            return msg;
-          });
+              return msg;
+            })
+          );
         })
-      );
-    else return of([]);
+      )
+      .subscribe(() => {});
   }
 
   sendMessage(message: Message): void {
